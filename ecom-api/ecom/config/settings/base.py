@@ -44,7 +44,9 @@ THIRD_PARTY_APPS = [
     'djoser',
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    'apps.common.apps.CommonConfig',
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
