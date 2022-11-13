@@ -48,7 +48,7 @@ class Product(BaseModel):
             if self.image:
                 self.thumbnail = make_thumbnail(self.image)
                 self.save()
-                return 'http://127.0.0.1:8000' + self.thumbnail.url
+                return 'http://127.0.0.1:8081' + self.thumbnail.url
 
             else:
                 return ''
