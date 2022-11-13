@@ -1,10 +1,8 @@
 from django.http import Http404
 from django.db.models import Q
-from django.shortcuts import render
 
 from rest_framework import viewsets
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from .serializers import ProductSerializer, CategorySerializer
 from ..models import Product, Category
