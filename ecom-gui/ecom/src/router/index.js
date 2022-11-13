@@ -18,7 +18,7 @@ import routes from "./routes";
  * with the Router instance.
  */
 
-export default route(function (/* { store, ssrContext } */ { store }) {
+export default route(function ({ store }) {
   const Map = computed(() => {
     return store.getters["app/getMAP"];
   });

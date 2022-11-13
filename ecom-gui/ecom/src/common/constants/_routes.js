@@ -6,4 +6,5 @@ export const APP_ROUTES = {
   WINTER: { NAME: "winter", PATH: "winter" },
   CART: { NAME: "cart", PATH: "cart" },
   PRODUCT_DETAILS: { NAME: "product_details", PATH: "product_details" },
+  SEARCH_RESULTS: { NAME: "search_results", PATH: "search_results" },
 };

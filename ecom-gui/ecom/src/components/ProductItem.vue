@@ -23,7 +23,7 @@
       </q-card-section>
       <q-card-actions class="flex flex-center q-pb-lg">
         <q-btn
-          @click="toProductDetails"
+          @click="goToDetails"
           color="primary"
           :label="MAP.HOMEPAGE.VIEWDETAILS"
         ></q-btn>
@@ -37,7 +37,7 @@ import ProductItem from "./ProductItem.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { APP_ROUTES } from "../common/constants/_routes";
+import { toProductDetails } from "src/common/utils/functions";
 
 const props = defineProps({
   product: {
@@ -45,33 +45,25 @@ const props = defineProps({
     required: true,
   },
 });
-
-const $store = useStore();
-const $router = useRouter();
+const product = computed(() => {
+  return props.product;
+});
 const categories = computed(() => {
   return $store.getters["products/getCategories"];
 });
 
-const product = computed(() => {
-  return props.product;
-});
+const $store = useStore();
+const $router = useRouter();
 
 const MAP = computed(() => {
   return $store.getters["app/getMAP"];
 });
 
-async function toProductDetails() {
-  try {
-    const category_slug = categories.value.find((category) => {
-      return category.id === product.value.category;
-    })["slug"];
-    const product_slug = props.product.slug;
-    const queryParams = { category_slug, product_slug };
-    await $store.dispatch("products/getProductDetails", queryParams);
-    $router.push({ name: APP_ROUTES.PRODUCT_DETAILS.NAME });
-  } catch (error) {
-    console.log(error);
-  }
+function goToDetails() {
+  const category_slug = categories.value.find((category) => {
+    return category.id === product.value.category;
+  })["slug"];
+  toProductDetails(product.value.slug, category_slug);
 }
 </script>
 

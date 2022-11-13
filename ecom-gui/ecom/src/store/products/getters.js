@@ -1,7 +1,3 @@
-/*
-export function someGetter (state) {
-}
-*/
 export function getLatestProducts(state) {
   return state.latestProducts;
 }
@@ -10,4 +6,7 @@ export function getCategories(state) {
 }
 export function getSelectedProduct(state) {
   return state.selectedProduct;
+}
+export function getSearchedProduct(state) {
+  return state.searchedProducts;
 }

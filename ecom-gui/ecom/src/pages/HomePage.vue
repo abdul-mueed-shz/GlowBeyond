@@ -5,21 +5,31 @@
   </q-page>
 </template>
 
-<script setup>
-import { computed, onMounted, ref } from "vue";
+<script>
+import { computed, onMounted } from "vue";
 import BannerItem from "../components/BannerItem.vue";
 import LatestProducts from "../components/LatestProducts.vue";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
-const $store = useStore();
 
-const productList = computed(() => {
-  return $store.getters["products/getLatestProducts"];
-});
+export default {
+  components: {
+    BannerItem,
+    LatestProducts,
+  },
+  setup() {
+    const $store = useStore();
+    const productList = computed(() => {
+      return $store.getters["products/getLatestProducts"];
+    });
 
-onMounted(async () => {
-  await $store.dispatch("cart/initializeCart");
-  await $store.dispatch("products/fetchLatestProducts");
-  await $store.dispatch("products/fetchCategories");
-});
+    onMounted(async () => {
+      await $store.dispatch("cart/initializeCart");
+      await $store.dispatch("products/fetchLatestProducts");
+      await $store.dispatch("products/fetchCategories");
+    });
+    return {
+      productList,
+    };
+  },
+};
 </script>

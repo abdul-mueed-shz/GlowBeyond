@@ -1,7 +1,3 @@
-/*
-export function someAction (context) {
-}
-*/
 export async function initializeCart({ state, commit }) {
   await commit("initializeCart");
   const cartQuantity = state.items.length;

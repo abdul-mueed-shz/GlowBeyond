@@ -3,5 +3,6 @@ export default function () {
     latestProducts: [],
     categories: [],
     selectedProduct: {},
+    searchedProducts: [],
   };
 }

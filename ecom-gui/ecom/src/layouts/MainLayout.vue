@@ -13,7 +13,21 @@
         <q-toolbar-title>
           {{ MAP.APPNAME }}
         </q-toolbar-title>
-        <div>
+        <q-input
+          class="bg-white rounded-borders q-my-sm"
+          dense
+          filled
+          label="Search"
+          :model-value="search"
+          @update:model-value="searchProducts"
+          debounce="500"
+        >
+          <template #append>
+            <q-icon name="mdi-magnify"></q-icon>
+          </template>
+        </q-input>
+
+        <!-- <div id="logDetails">
           <q-btn outline icon="mdi-account" color="" :label="MAP.LOGIN">
             <q-menu fit>
               <q-card
@@ -33,7 +47,7 @@
               </q-card>
             </q-menu>
           </q-btn>
-        </div>
+        </div> -->
       </q-toolbar>
     </q-header>
 
@@ -60,38 +74,69 @@
   </q-layout>
 </template>
 
-<script setup>
+<script>
 import MainMenu from "src/components/MainMenu.vue";
 import { APP_ROUTES } from "../common/constants/_routes";
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
-// CONSTANTS
-const $store = useStore();
+export default {
+  components: {
+    MainMenu,
+  },
+  setup() {
+    // CONSTANTS
+    const search = ref("");
 
-const leftDrawerOpen = ref(false);
+    const $store = useStore();
 
-// COMPUTED PROPERTIES
+    const $router = useRouter();
 
-const MAP = computed(() => {
-  return $store.getters["app/getMAP"];
-});
+    const leftDrawerOpen = ref(false);
 
-const selectedMenuItem = computed(() => {
-  return $store.getters["menu/getSelectedMenuItem"];
-});
+    // COMPUTED PROPERTIES
 
-const miniState = computed(() => {
-  return $store.getters["app/getMiniState"];
-});
+    const MAP = computed(() => {
+      return $store.getters["app/getMAP"];
+    });
 
-const menuList = computed(() => {
-  return $store.getters["menu/getMenuList"];
-});
+    const selectedMenuItem = computed(() => {
+      return $store.getters["menu/getSelectedMenuItem"];
+    });
 
-// FUNCTIONS
+    const miniState = computed(() => {
+      return $store.getters["app/getMiniState"];
+    });
 
-function toggleLeftDrawer() {
-  $store.commit("app/toggleMiniState");
-}
+    const menuList = computed(() => {
+      return $store.getters["menu/getMenuList"];
+    });
+
+    // FUNCTIONS
+    function toggleLeftDrawer() {
+      $store.commit("app/toggleMiniState");
+    }
+
+    function searchProducts(query) {
+      $store.dispatch("products/search", { query }).then((res) => {
+        if (res.length > 0) {
+          $router.push(APP_ROUTES.SEARCH_RESULTS.NAME);
+        }
+      });
+    }
+
+    return {
+      leftDrawerOpen,
+      MAP,
+      selectedMenuItem,
+      miniState,
+      menuList,
+      APP_ROUTES,
+      toggleLeftDrawer,
+      search,
+      searchProducts,
+    };
+  },
+};
 </script>

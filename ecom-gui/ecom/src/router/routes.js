@@ -72,6 +72,18 @@ const routes = [
       },
     ],
   },
+  {
+    path: APP_ROUTES.BASE.PATH,
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: APP_ROUTES.SEARCH_RESULTS.PATH,
+        name: APP_ROUTES.SEARCH_RESULTS.NAME,
+        meta: {},
+        component: () => import("pages/SearchResults.vue"),
+      },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it
