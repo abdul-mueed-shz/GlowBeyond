@@ -1,6 +1,6 @@
 <template>
   <q-list>
-    <menu-item v-if="!item.subMenu" :item="item" />
+    <menu-item v-if="!item.subMenu" :item="item"> </menu-item>
     <q-expansion-item
       v-else-if="!props.miniState"
       :icon="item.icon.name"

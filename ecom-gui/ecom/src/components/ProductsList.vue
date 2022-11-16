@@ -23,7 +23,7 @@
             {{ product.description }}
           </div>
           <div>
-            {{ "Price: " + product.price + " rs" }}
+            {{ "Price: " + +product.price + " Rs" }}
           </div>
         </q-card-section>
       </q-card>

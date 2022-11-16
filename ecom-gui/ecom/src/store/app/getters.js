@@ -1,7 +1,3 @@
-/*
-export function someGetter (state) {
-}
-*/
 export function getMiniState(state) {
   return state.miniState;
 }

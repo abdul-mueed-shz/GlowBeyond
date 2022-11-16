@@ -20,6 +20,7 @@ export default function () {
           winter: "Winter",
           cart: "Cart",
           product_details: "Details",
+          search_results: "Search",
         },
       },
     },

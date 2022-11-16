@@ -12,6 +12,20 @@
       {{ item.label }}
       {{ item.name === APP_ROUTES.CART.NAME ? `(${cartQuantity})` : "" }}
     </q-item-section>
+    <q-tooltip
+      class="bg-grey-9"
+      v-if="isMinitState"
+      anchor="center right"
+      self="center left"
+    >
+      <div>
+        {{
+          item.name === APP_ROUTES.CART.NAME
+            ? `${item.tooltip}(${cartQuantity})`
+            : ""
+        }}
+      </div>
+    </q-tooltip>
   </q-item>
 </template>
 
@@ -37,6 +51,9 @@ const item = computed(() => {
 });
 const selectedMenuItem = computed(() => {
   return $store.getters["menu/getSelectedMenuItem"];
+});
+const isMinitState = computed(() => {
+  return $store.getters["app/getMiniState"];
 });
 const cartQuantity = computed(() => {
   return $store.getters["cart/getCartQuantity"];

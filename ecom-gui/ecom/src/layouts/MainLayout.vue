@@ -18,7 +18,7 @@
           dense
           filled
           label="Search"
-          :model-value="search"
+          v-model="search"
           @update:model-value="searchProducts"
           debounce="500"
         >

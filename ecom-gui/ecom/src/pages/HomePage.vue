@@ -22,11 +22,6 @@ export default {
       return $store.getters["products/getLatestProducts"];
     });
 
-    onMounted(async () => {
-      await $store.dispatch("cart/initializeCart");
-      await $store.dispatch("products/fetchLatestProducts");
-      await $store.dispatch("products/fetchCategories");
-    });
     return {
       productList,
     };

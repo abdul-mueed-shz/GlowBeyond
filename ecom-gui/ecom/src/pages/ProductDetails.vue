@@ -13,7 +13,7 @@
           {{ APP_CONSTANTS.INFORMATION }}
         </div>
         <div class="q-mt-lg text-h5 text-grey-9 q-mb-lg">
-          {{ `${APP_CONSTANTS.PRICE}: ${product.price}rs ` }}
+          {{ `${APP_CONSTANTS.PRICE}: ${+product.price} Rs ` }}
         </div>
         <div class="row q-gutter-x-md">
           <q-input
@@ -65,10 +65,12 @@ export default {
 
     // Functions
     async function addToCart() {
+      // CREATE UTIL FUNCTION OF THIS. PASS argument quantity as quanity.value and product as product.value
       try {
         const payload = {
-          product: product.value,
+          ...product.value,
           quantity: quantity.value,
+          // quantity: quantity.value,
         };
         await $store.dispatch("cart/addToCart", payload);
         successNotification("Product Added to cart");

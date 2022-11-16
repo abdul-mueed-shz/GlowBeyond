@@ -1,7 +1,3 @@
-/*
-export function someMutation (state) {
-}
-*/
 export function initializeCart(state) {
   if (localStorage.getItem("cartItems")) {
     state.items = JSON.parse(localStorage.getItem("cartItems"));
@@ -15,10 +11,8 @@ export function setCartQuantity(state, quantity) {
 }
 export function addToCart(state, payload) {
   try {
-    const product = state.items.find(
-      (item) => item.product.id === payload.product.id
-    );
-    if (product !== undefined) {
+    const product = state.items.find((item) => item.id === payload.id);
+    if (product) {
       product.quantity =
         parseInt(product.quantity) + parseInt(payload.quantity);
     } else {
