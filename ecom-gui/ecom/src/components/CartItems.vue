@@ -14,7 +14,7 @@
       </q-tr>
     </template>
     <template #body="props">
-      <q-tr :props="props" class="text-secondary text-weight-medium">
+      <q-tr :props="props" class="text-weight-medium">
         <q-td key="id" :props="props">
           {{ props.row.id }}
         </q-td>
@@ -53,7 +53,7 @@
             round
             size="sm"
             icon="mdi-delete"
-            @click="removeFromCart(props.row)"
+            @click="deleteProductFromCart(props.row)"
           ></q-btn>
         </q-td>
       </q-tr>
@@ -99,13 +99,37 @@ export default {
       }
       console.log(product);
     }
-    function decrementProductQuantity(product) {
+    async function decrementProductQuantity(product) {
+      // CREATE UTIL FUNCTION OF THIS. PASS ARGUMENT quantiy 1 and product
+      try {
+        const payload = {
+          ...product,
+          quantity: 1,
+        };
+        await $store.dispatch("cart/removeFromCart", payload);
+        successNotification("Product removed from cart");
+      } catch (err) {
+        errorNotification("Failed to remove from cart");
+        console.log(err);
+      }
+      console.log(product);
+    }
+    async function deleteProductFromCart(product) {
+      // CREATE UTIL FUNCTION OF THIS. PASS ARGUMENT quantiy 1 and product
+      try {
+        await $store.dispatch("cart/deleteFromCart", product);
+        successNotification("Product removed from cart");
+      } catch (err) {
+        errorNotification("Failed to remove from cart");
+        console.log(err);
+      }
       console.log(product);
     }
     return {
       removeFromCart,
       incrementProductQuantity,
       decrementProductQuantity,
+      deleteProductFromCart,
     };
   },
 };

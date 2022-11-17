@@ -18,10 +18,9 @@
         <q-card-section>
           <!--  -->
           <div class="column text-h6 text-weight-regular">
-            <div class="row">
+            <div class="row q-mb-lg">
               <div>{{ `Total Items: ${cartQuantity}` }}</div>
             </div>
-            <q-separator class="q-my-md"></q-separator>
             <div class="row">
               <div>{{ `Price: Rs ${getCartTotal}` }}</div>
             </div>

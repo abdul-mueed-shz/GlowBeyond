@@ -6,19 +6,16 @@
         <!-- <q-img src="../assets/demo.jpg"></q-img> -->
       </q-card-section>
       <q-card-section class="column">
-        <div class="text-h4 text-weight-medium">
+        <div class="text-h4 text-weight-medium q-mb-lg">
           {{ product.name }}
         </div>
-        <q-separator class="bg-grey-5 q-ma-sm" inset></q-separator>
         <div class="text-body1 text-weight-medium">
-          {{ product.description }}
-          <div class="flex flex-center">
-            <q-separator
-              class="full-width bg-grey-5 q-ma-sm flex separator-width"
-              inset
-            ></q-separator>
+          <div class="q-mb-sm">
+            {{ product.description }}
           </div>
-          {{ `${+product.price} Rs` }}
+          <div>
+            {{ `${+product.price} Rs` }}
+          </div>
         </div>
       </q-card-section>
       <q-card-actions class="flex flex-center q-pb-lg">

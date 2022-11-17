@@ -22,7 +22,7 @@
         {{
           item.name === APP_ROUTES.CART.NAME
             ? `${item.tooltip}(${cartQuantity})`
-            : ""
+            : `${item.tooltip}`
         }}
       </div>
     </q-tooltip>
