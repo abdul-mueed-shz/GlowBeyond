@@ -25,7 +25,7 @@
             type="number"
           ></q-input>
           <q-btn
-            @click="addToCart"
+            @click="addToCart(product, quantity)"
             class="col"
             label="Add to cart"
             color="primary"
@@ -46,11 +46,8 @@
 
 <script>
 import { APP_CONSTANTS } from "src/common/constants/app";
-import {
-  successNotification,
-  errorNotification,
-} from "src/common/utils/notifications";
-import { computed, onMounted, ref } from "vue";
+import { addToCart } from "src/common/utils/functions";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 export default {
   setup() {
@@ -58,30 +55,14 @@ export default {
     const quantity = ref(1);
     const $store = useStore();
 
-    // Computed Propert
+    // Computed Properties
     const product = computed(() => {
       return $store.getters["products/getSelectedProduct"];
     });
 
-    // Functions
-    async function addToCart() {
-      // CREATE UTIL FUNCTION OF THIS. PASS argument quantity as quanity.value and product as product.value
-      try {
-        const payload = {
-          ...product.value,
-          quantity: quantity.value,
-          // quantity: quantity.value,
-        };
-        await $store.dispatch("cart/addToCart", payload);
-        successNotification("Product Added to cart");
-      } catch (err) {
-        errorNotification("Failed to add to cart");
-        console.log(err);
-      }
-    }
-
+    // Functions/Variables/Properties exposed in the template
     return { product, APP_CONSTANTS, quantity, addToCart };
   },
-  // name: 'PageName',
+  name: "ProductDetails",
 };
 </script>

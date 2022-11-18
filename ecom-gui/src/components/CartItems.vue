@@ -32,7 +32,7 @@
             round
             size="xs"
             icon="mdi-plus"
-            @click="incrementProductQuantity(props.row)"
+            @click="addToCart(props.row, 1)"
           ></q-btn>
           <q-btn
             flat
@@ -40,7 +40,7 @@
             round
             size="xs"
             icon="mdi-minus"
-            @click="decrementProductQuantity(props.row)"
+            @click="decrementFromCart(props.row, 1)"
           ></q-btn>
         </q-td>
         <q-td key="quantity" :props="props">
@@ -53,7 +53,7 @@
             round
             size="sm"
             icon="mdi-delete"
-            @click="deleteProductFromCart(props.row)"
+            @click="deleteFromCart(props.row)"
           ></q-btn>
         </q-td>
       </q-tr>
@@ -67,6 +67,11 @@ import {
   successNotification,
   errorNotification,
 } from "src/common/utils/notifications";
+import {
+  addToCart,
+  decrementFromCart,
+  deleteFromCart,
+} from "src/common/utils/functions";
 export default {
   name: "CartItems",
   props: {
@@ -80,56 +85,10 @@ export default {
     },
   },
   setup() {
-    const $store = useStore();
-    function removeFromCart(product) {
-      console.log(product);
-    }
-    async function incrementProductQuantity(product) {
-      // CREATE UTIL FUNCTION OF THIS. PASS ARGUMENT quantiy 1 and product
-      try {
-        const payload = {
-          ...product,
-          quantity: 1,
-        };
-        await $store.dispatch("cart/addToCart", payload);
-        successNotification("Product Added to cart");
-      } catch (err) {
-        errorNotification("Failed to add to cart");
-        console.log(err);
-      }
-      console.log(product);
-    }
-    async function decrementProductQuantity(product) {
-      // CREATE UTIL FUNCTION OF THIS. PASS ARGUMENT quantiy 1 and product
-      try {
-        const payload = {
-          ...product,
-          quantity: 1,
-        };
-        await $store.dispatch("cart/removeFromCart", payload);
-        successNotification("Product removed from cart");
-      } catch (err) {
-        errorNotification("Failed to remove from cart");
-        console.log(err);
-      }
-      console.log(product);
-    }
-    async function deleteProductFromCart(product) {
-      // CREATE UTIL FUNCTION OF THIS. PASS ARGUMENT quantiy 1 and product
-      try {
-        await $store.dispatch("cart/deleteFromCart", product);
-        successNotification("Product removed from cart");
-      } catch (err) {
-        errorNotification("Failed to remove from cart");
-        console.log(err);
-      }
-      console.log(product);
-    }
     return {
-      removeFromCart,
-      incrementProductQuantity,
-      decrementProductQuantity,
-      deleteProductFromCart,
+      addToCart,
+      decrementFromCart,
+      deleteFromCart,
     };
   },
 };

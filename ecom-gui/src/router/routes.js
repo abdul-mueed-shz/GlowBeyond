@@ -7,6 +7,9 @@ const routes = [
       {
         path: "",
         name: APP_ROUTES.BASE.NAME,
+        beforeEnter: (to, from, next) => {
+          next(APP_ROUTES.HOME.PATH);
+        },
         meta: {},
         component: () => import("pages/LoginPage.vue"),
       },

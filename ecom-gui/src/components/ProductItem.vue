@@ -3,7 +3,6 @@
     <q-card class="full-height">
       <q-card-section>
         <q-img class="image-area" :src="product.get_thumbnail"></q-img>
-        <!-- <q-img src="../assets/demo.jpg"></q-img> -->
       </q-card-section>
       <q-card-section class="column">
         <div class="text-h4 text-weight-medium q-mb-lg">
