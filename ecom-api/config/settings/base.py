@@ -46,13 +46,10 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'apps.commons.apps.CommonsConfig',
     'apps.product.apps.ProductConfig',
+    'apps.user.apps.UserConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080"
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -143,3 +140,5 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CORS_ORIGIN_ALLOW_ALL = True
+# AUTH_USER_MODEL = 'user.User'
