@@ -1,4 +1,3 @@
-/*
-export function someMutation (state) {
+export function setLoginDetails(state, payload) {
+  state.loginDetails = payload;
 }
-*/

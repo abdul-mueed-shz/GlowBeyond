@@ -1,7 +1,6 @@
 import { boot } from "quasar/wrappers";
 
-export default boot(async ({ store, router }) => {
-  await store.dispatch("cart/initializeCart");
+export default boot(async ({ store, app }) => {
   await store.dispatch("products/fetchLatestProducts");
   await store.dispatch("products/fetchCategories");
 });

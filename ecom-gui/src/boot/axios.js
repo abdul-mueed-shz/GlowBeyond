@@ -7,7 +7,7 @@ import axios from "axios";
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const BASE_URL = "http://127.0.0.1:8081/api/v1/";
+const BASE_URL = "http://127.0.0.1:8001/api/v1/";
 
 const api = axios.create({ baseURL: BASE_URL });
 

@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div
-      class="col-2 q-mr-md"
+      class="col-xs-12 col-sm-5 col-md-3 col-lg-2 q-mr-md q-my-sm"
       id="products"
       v-for="product in products"
       :key="product.id"
@@ -12,7 +12,10 @@
         @click="toProductcategoryDetails(product)"
       >
         <q-card-section>
-          <q-img :src="product.get_thumbnail"></q-img>
+          <q-img
+            style="max-width: 300px; max-height: 190px"
+            :src="product.get_thumbnail"
+          ></q-img>
         </q-card-section>
         <q-card-section>
           <div class="q-mb-sm text-weight-medium">

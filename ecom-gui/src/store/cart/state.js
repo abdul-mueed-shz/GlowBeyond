@@ -4,6 +4,5 @@ export default function () {
   return {
     items: [],
     cartQuantity: 0,
-    //
   };
 }
