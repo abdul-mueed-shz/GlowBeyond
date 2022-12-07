@@ -4,6 +4,13 @@ export default function () {
       APPNAME: "Starks",
       LOGIN: "Log In",
       CountryName: "Pakistan",
+      CART_PAGE: {
+        TITLE: "Cart",
+        CARD_TITLES: {
+          SUMMARY: "Summary",
+          CHECKOUT: "Checkout",
+        },
+      },
       HOMEPAGE: {
         GREETINGS: {
           HEADING: "Welcome to The Starks",
@@ -21,7 +28,22 @@ export default function () {
           cart: "Cart",
           product_details: "Details",
           search_results: "Search",
+          account_details: "Account",
         },
+      },
+      INPUTS_LABELS: {
+        FIRST_NAME: "First name",
+        LAST_NAME: "Last name",
+        EMAIL: "Email",
+        PHONE: "Phone",
+        ADDRESS: "Address",
+        ZIP: "Zip code",
+        PLACE: "City",
+      },
+      BTN: {
+        CHECKOUT: "Proceed to checkout",
+        CANCEL: "Cancel",
+        PAY: "Buy",
       },
     },
     miniState: true,

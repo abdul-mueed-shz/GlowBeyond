@@ -31,36 +31,9 @@
             <q-btn flat @click="searchProducts" icon="mdi-magnify"></q-btn>
           </template>
         </q-input>
-        <q-btn
-          outline
-          class="q-ml-sm"
-          label="login"
-          @click="redirectToLogin"
-        ></q-btn>
-        <!-- <div class="q-pl-md" id="logDetails">
-          <q-btn outline icon="mdi-account" color="" :label="MAP.LOGIN">
-            <q-menu fit>
-              <q-card
-                style="min-width: 280px"
-                flat
-                class="column text-primary flex-center q-mt-md"
-              >
-                <q-card-section
-                  class="column items-center text-weight-medium text-body1"
-                >
-                  <q-avatar icon="mdi-account" size="100px"></q-avatar>
-                  {{ "Abdul Mueed Shahbaz" }}
-                </q-card-section>
-                <q-card-actions>
-                  <q-btn outline :label="MAP.LOGIN"></q-btn>
-                </q-card-actions>
-              </q-card>
-            </q-menu>
-          </q-btn>
-        </div> -->
+        <AuthMenu />
       </q-toolbar>
     </q-header>
-
     <q-drawer
       v-model="leftDrawerOpen"
       :mini="miniState"
@@ -86,16 +59,16 @@
 
 <script>
 import MainMenu from "src/components/MainMenu.vue";
+import AuthMenu from "src/components/AuthenticationMenu.vue";
 import { APP_ROUTES } from "../common/constants/_routes";
-import { COUPLED_APPS } from "../common/constants/app";
 import { computed, getCurrentInstance, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { errorNotification } from "src/common/utils/notifications";
 
 export default {
   components: {
     MainMenu,
+    AuthMenu,
   },
   setup() {
     // CONSTANTS
@@ -135,27 +108,7 @@ export default {
     function toggleLeftDrawer() {
       $store.commit("app/toggleMiniState");
     }
-    function getRequiredGlobals() {
-      const appName = app.appContext.config.globalProperties.$appName;
-      const loginAppUrl = app.appContext.config.globalProperties.$loginAppUrl;
-      if (appName && loginAppUrl) {
-        return { appName, loginAppUrl };
-      }
-    }
-    function redirectToLogin() {
-      const requiredGlobals = getRequiredGlobals();
-      if (!requiredGlobals) {
-        errorNotification("Service currently unavailable");
-        return;
-      }
-      const queryStringObject = {
-        app_name: requiredGlobals.appName,
-        redirect_url: window.location.origin,
-      };
-      const queryString =
-        "?" + new URLSearchParams(queryStringObject).toString();
-      window.location.href = requiredGlobals.loginAppUrl + queryString;
-    }
+
     function searchProducts(query) {
       $store.dispatch("products/search", { query }).then((res) => {
         if (res.length > 0) {
@@ -163,12 +116,33 @@ export default {
         }
       });
     }
-    onMounted(() => {
+
+    function isTokenValid() {
       const currentDate = new Date();
+      const expiryDate = new Date();
       const currentTime = ~~(currentDate.getTime() / 1000);
-      console.log(loginDetails.value.expiry - currentTime);
-      if (loginDetails.value) {
-        console.log(loginDetails.value.expiry, "expiry");
+      expiryDate.setSeconds(loginDetails.value.token_exp_date - currentTime);
+      return expiryDate > currentDate;
+    }
+    function setTokenWatcher() {
+      let intervalId = $store.getters["login/getIntervalId"];
+      if (!intervalId) {
+        intervalId = setInterval(() => {
+          if (!isTokenValid()) {
+            $store.dispatch("login/setLoginDetails", null);
+            clearInterval(intervalId);
+            $store.dispatch("login/setIntervalId", null);
+          }
+        }, 100000);
+        $store.dispatch("login/setIntervalId", intervalId);
+      }
+    }
+    onMounted(async () => {
+      // headers: {
+      //   AUTHTOKEN: loginDetails.value.auth_token, //the token is a variable which holds the token
+      // }
+      if (loginDetails.value && isTokenValid()) {
+        setTokenWatcher();
         return;
       }
       if (
@@ -180,19 +154,15 @@ export default {
           new URLSearchParams(querySearch)
         );
         if (queryObject.auth_token) {
-          $store.dispatch("login/getAuthDetails", queryObject);
-          setTimeout(() => {
-            window.location.href = window.location.origin;
-          }, 1000);
-          // window.location.href = window.location.origin;
-          // TODO: Store auth token in store and set isAuthenticated to true and create persistent storage
-          // window.location.href = window.location.origin;
+          await $store.dispatch("login/getAuthDetails", queryObject);
+          setTokenWatcher();
+          window.history.replaceState({}, "home", window.location.origin);
         }
+        return;
       }
     });
 
     return {
-      redirectToLogin,
       leftDrawerOpen,
       MAP,
       selectedMenuItem,

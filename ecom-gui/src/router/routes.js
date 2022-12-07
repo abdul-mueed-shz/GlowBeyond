@@ -87,6 +87,20 @@ const routes = [
       },
     ],
   },
+  {
+    path: APP_ROUTES.BASE.PATH,
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: APP_ROUTES.ACCOUNT_DETAILS.PATH,
+        name: APP_ROUTES.ACCOUNT_DETAILS.NAME,
+        meta: {
+          requireAuthentication: true,
+        },
+        component: () => import("pages/AccountDetails.vue"),
+      },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it

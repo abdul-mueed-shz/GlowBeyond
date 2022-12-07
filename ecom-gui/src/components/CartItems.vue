@@ -62,11 +62,6 @@
 </template>
 
 <script>
-import { useStore } from "vuex";
-import {
-  successNotification,
-  errorNotification,
-} from "src/common/utils/notifications";
 import {
   addToCart,
   decrementFromCart,
@@ -81,6 +76,10 @@ export default {
     },
     columns: {
       type: Object,
+      required: true,
+    },
+    isCheckingOut: {
+      type: Boolean,
       required: true,
     },
   },

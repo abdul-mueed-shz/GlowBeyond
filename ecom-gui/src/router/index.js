@@ -1,5 +1,6 @@
 import { route } from "quasar/wrappers";
 import { APP_CONSTANTS } from "src/common/constants/app";
+import { errorNotification } from "src/common/utils/notifications";
 import { computed } from "vue";
 import {
   createRouter,
@@ -22,6 +23,9 @@ export default route(function ({ store }) {
   const Map = computed(() => {
     return store.getters["app/getMAP"];
   });
+  const loginDetails = computed(() => {
+    return store.getters["login/getLoginDetails"];
+  });
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === "history"
@@ -42,6 +46,13 @@ export default route(function ({ store }) {
     document.title = `${APP_CONSTANTS.APP_NAME} | ${
       Map.value.Link.Routes[to.name]
     }`;
+  });
+  Router.beforeEach((to, from, next) => {
+    if (to.meta.requireAuthentication && !loginDetails.value) {
+      errorNotification("Unauthenticated");
+      return;
+    }
+    next();
   });
   return Router;
 });
