@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .serializers import ProductSerializer, CategorySerializer
 from ..models import Product, Category
+from ...commons.utils.auth import JwtAuthentication
 
 
 class FetchCategories(viewsets.ViewSet):
@@ -30,6 +31,7 @@ class FetchCategories(viewsets.ViewSet):
 
 
 class FetchLatestProducts(viewsets.ViewSet):
+
     def list(self, request):
         queryset = Product.objects.all()[:4]
         serializer = ProductSerializer(queryset, many=True)

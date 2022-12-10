@@ -47,6 +47,7 @@ LOCAL_APPS = [
     'apps.commons.apps.CommonsConfig',
     'apps.product.apps.ProductConfig',
     'apps.user.apps.UserConfig',
+    'apps.orders.apps.OrdersConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -138,7 +139,12 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
+STRIPE_SECRET_KEY = "ragnarok"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    "AUTHTOKEN",
+    "content-type"
+]
 # AUTH_USER_MODEL = 'user.User'

@@ -7,6 +7,7 @@ api_prefix = 'api/v1/'
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
+                  path(api_prefix, include('apps.orders.api.urls')),
                   path(api_prefix, include('djoser.urls')),
                   path(api_prefix, include('djoser.urls.authtoken')),
                   path(api_prefix, include('apps.commons.api.urls')),

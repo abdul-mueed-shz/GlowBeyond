@@ -8,6 +8,17 @@ from django.contrib.auth.models import User
 from apps.user.api.serializers import RegisterSerializer, UserSerializer, TokenSerializer
 
 
+class LogoutView(APIView):
+    @staticmethod
+    def post(request):
+        response = Response()
+        response.delete_cookie('auth_token')
+        response.data = {
+            "message": "Logged out successfully"
+        }
+        return response
+
+
 # Create your views here.
 class AuthDetails(APIView):
     def check_required_fields(self, payload):
@@ -16,7 +27,8 @@ class AuthDetails(APIView):
                 'email': payload.get('email'),
                 'first_name': payload.get('first_name'),
                 'last_name': payload.get('last_name'),
-                'expiry': payload.get('exp')
+                'expiry': payload.get('exp'),
+                "exp_interval_in_minutes": payload.get('exp_interval_in_minutes')
             }
         return False
 
@@ -47,9 +59,11 @@ class AuthDetails(APIView):
                 'token': auth_token,
                 'expiry': token_expiry,
             }
-
             response.set_cookie(key='auth_token', value=auth_token, httponly=True)
-            data = {'auth_token': auth_token, 'expiry': token_expiry, }
+            data = {
+                'auth_token': auth_token,
+                'token_exp_date': token_expiry,
+            }
 
             user = User.objects.filter(email=registration_data.get('email'))
             if not len(user):
