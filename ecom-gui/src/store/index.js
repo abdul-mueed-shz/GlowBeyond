@@ -18,7 +18,7 @@ const persistedState = createPersistedState({
   paths: ["login", "cart"],
 });
 
-export default store(function (/* { ssrContext } */) {
+export default store(function () {
   const Store = createStore({
     modules: {
       login,

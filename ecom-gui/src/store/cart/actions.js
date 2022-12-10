@@ -1,3 +1,5 @@
+import { api } from "src/boot/axios";
+
 export async function addToCart({ state, commit }, payload) {
   try {
     await commit("addToCart", payload);
@@ -26,5 +28,16 @@ export async function deleteFromCart({ state, commit }, payload) {
     return Promise.resolve();
   } catch (err) {
     return Promise.reject(err);
+  }
+}
+export async function checkout({ commit }, payload) {
+  try {
+    const url = "checkout";
+    const response = await api.post(url, payload.data, {
+      headers: { AUTHTOKEN: payload.auth_token },
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
   }
 }

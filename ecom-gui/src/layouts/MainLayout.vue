@@ -125,23 +125,26 @@ export default {
       return expiryDate > currentDate;
     }
     function setTokenWatcher() {
-      let intervalId = $store.getters["login/getIntervalId"];
-      if (!intervalId) {
-        intervalId = setInterval(() => {
-          if (!isTokenValid()) {
-            $store.dispatch("login/setLoginDetails", null);
-            clearInterval(intervalId);
-            $store.dispatch("login/setIntervalId", null);
-          }
-        }, 100000);
-        $store.dispatch("login/setIntervalId", intervalId);
+      if (!isTokenValid()) {
+        $store.dispatch("login/setLoginDetails", null);
+        clearInterval(intervalId);
+        $store.dispatch("login/setIntervalId", null);
+        return;
       }
+      const intervalId = setInterval(() => {
+        if (!isTokenValid()) {
+          $store.dispatch("login/setLoginDetails", null);
+          clearInterval(intervalId);
+          $store.dispatch("login/setIntervalId", null);
+        }
+      }, 60000);
+      $store.dispatch("login/setIntervalId", intervalId);
     }
     onMounted(async () => {
       // headers: {
       //   AUTHTOKEN: loginDetails.value.auth_token, //the token is a variable which holds the token
       // }
-      if (loginDetails.value && isTokenValid()) {
+      if (loginDetails.value) {
         setTokenWatcher();
         return;
       }
@@ -158,7 +161,6 @@ export default {
           setTokenWatcher();
           window.history.replaceState({}, "home", window.location.origin);
         }
-        return;
       }
     });
 

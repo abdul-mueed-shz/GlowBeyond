@@ -41,7 +41,7 @@
               <div class="col-4 q-px-sm">
                 <q-input
                   clearable
-                  v-model="formData.firstName"
+                  v-model="formData.first_name"
                   outlined
                   :label="MAP.INPUTS_LABELS['FIRST_NAME']"
                   :rules="[
@@ -53,7 +53,7 @@
               <div class="col-4 q-px-sm">
                 <q-input
                   clearable
-                  v-model="formData.lastName"
+                  v-model="formData.last_name"
                   outlined
                   :label="MAP.INPUTS_LABELS['LAST_NAME']"
                   :rules="[
@@ -77,7 +77,8 @@
               <div class="col-4 q-px-sm">
                 <q-input
                   clearable
-                  v-model="formData.phoneNb"
+                  v-model="formData.phone"
+                  type="number"
                   outlined
                   :label="MAP.INPUTS_LABELS['PHONE']"
                   :rules="[
@@ -101,7 +102,7 @@
               <div class="col-4 q-px-sm">
                 <q-input
                   clearable
-                  v-model="formData.place"
+                  v-model="formData.city"
                   outlined
                   :label="MAP.INPUTS_LABELS['PLACE']"
                   :rules="[
@@ -113,8 +114,9 @@
               <div class="col-4 q-px-sm">
                 <q-input
                   clearable
-                  v-model="formData.zip"
+                  v-model="formData.zip_code"
                   outlined
+                  type="number"
                   :label="MAP.INPUTS_LABELS['ZIP']"
                   :rules="[
                     (val) => !!val || `${MAP.INPUTS_LABELS['ZIP']} is required`,
@@ -169,12 +171,13 @@ export default {
     const onCheckout = ref(false);
     const $q = useQuasar();
     const formData = reactive({
-      firstName: null,
-      lastName: null,
+      first_name: null,
+      last_name: null,
       email: null,
-      phoneNb: null,
+      phone: null,
       address: null,
-      zip: null,
+      zip_code: null,
+      city: null,
     });
     const columns = [
       {
@@ -240,14 +243,38 @@ export default {
 
     // Functions
     function toggleCheckout(val) {
-      if (val === true && !loginDetails.value) {
+      if (!val) {
+        return;
+      }
+      if (!cartQuantity.value) {
+        errorNotification("No items in cart");
+        return;
+      }
+      if (!loginDetails.value) {
         errorNotification("Unauthenticated! Please login");
         return;
       }
       onCheckout.value = val;
     }
+
     function checkOut() {
-      console.log("checkout");
+      let cartItems = JSON.parse(
+        JSON.stringify($store.getters["cart/getCartItems"])
+      );
+      for (let item in cartItems) {
+        delete cartItems[item].quantity;
+      }
+      const payload = {
+        auth_token: loginDetails.value.auth_token,
+        data: {
+          ...formData,
+          user: loginDetails.value.user_information,
+          products: cartItems,
+          stripe_token: "Ragnarok",
+          paid_amount: getCartTotal.value,
+        },
+      };
+      $store.dispatch("cart/checkout", payload);
       successfulBuyOutDialog();
     }
     function successfulBuyOutDialog() {
