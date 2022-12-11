@@ -48,3 +48,7 @@ export function deleteFromCart(state, payload) {
     return Promise.reject(err);
   }
 }
+export async function clearCart(state) {
+  state.items = [];
+  state.cartQuantity = 0;
+}

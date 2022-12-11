@@ -41,6 +41,8 @@
 
 <script>
 import { useDialogPluginComponent } from "quasar";
+import { APP_ROUTES } from "src/common/constants/_routes";
+import { useRouter } from "vue-router";
 
 export default {
   props: {
@@ -62,7 +64,7 @@ export default {
     //                    example: onDialogOK() - no payload
     //                    example: onDialogOK({ /*.../* }) - with payload
     // onDialogCancel - Function to call to settle dialog with "cancel" outcome
-
+    const router = useRouter();
     return {
       // This is REQUIRED;
       // Need to inject these (from useDialogPluginComponent() call)
@@ -75,6 +77,7 @@ export default {
       onOKClick() {
         // on OK, it is REQUIRED to
         // call onDialogOK (with optional payload)
+        router.push({ name: APP_ROUTES.ACCOUNT_DETAILS.NAME });
         onDialogOK();
         // or with payload: onDialogOK({ ... })
         // ...and it will also hide the dialog automatically

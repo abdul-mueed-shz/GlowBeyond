@@ -157,7 +157,7 @@ import { computed, reactive, ref } from "vue";
 import { useQuasar } from "quasar";
 import { useStore } from "vuex";
 import CartItems from "src/components/CartItems.vue";
-import SuccessDialog from "src/components/SuccessDialog";
+import SuccessDialog from "src/components/SuccessDialog.vue";
 import { errorNotification } from "src/common/utils/notifications";
 export default {
   name: "CartPage",
@@ -257,13 +257,7 @@ export default {
       onCheckout.value = val;
     }
 
-    function checkOut() {
-      // let cartItems = JSON.parse(
-      //   JSON.stringify($store.getters["cart/getCartItems"])
-      // );
-      // for (let item in cartItems) {
-      //   delete cartItems[item].quantity;
-      // }
+    async function checkOut() {
       if (!cartQuantity.value) {
         errorNotification("No items in cart");
         return;
@@ -274,12 +268,11 @@ export default {
           ...formData,
           user: loginDetails.value.user_information.id,
           products: cartItems.value,
-          // products: cartItems,
-          stripe_token: "Ragnarok",
+          // stripe_token: "Ragnarok",
           paid_amount: getCartTotal.value,
         },
       };
-      $store.dispatch("cart/checkout", payload);
+      await $store.dispatch("cart/checkout", payload);
       successfulBuyOutDialog();
     }
     function successfulBuyOutDialog() {
