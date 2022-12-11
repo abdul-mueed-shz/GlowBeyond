@@ -1,12 +1,14 @@
 from rest_framework import serializers
-from ..models import Orders
+from ..models import Orders, OrderItems
 from ...product.api.serializers import ProductSerializer
-from ...user.api.serializers import UserSerializer
+from django.contrib.auth.models import User
+
+from ...product.models import Product
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(read_only=False, many=True)
-    user = UserSerializer(read_only=False)
+    # products = ProductSerializer(read_only=False, many=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=False)
 
     class Meta:
         model = Orders
@@ -20,7 +22,20 @@ class OrderSerializer(serializers.ModelSerializer):
             'city',
             'zip_code',
             'user',
-            'stripe_token',
+            # 'stripe_token',
             'paid_amount',
-            'products',
+            # 'products',
+        )
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    order = serializers.PrimaryKeyRelatedField(queryset=Orders.objects.all(), many=False)
+    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), many=False)
+
+    class Meta:
+        model = OrderItems
+        fields = (
+            'order',
+            'product',
+            'quantity'
         )

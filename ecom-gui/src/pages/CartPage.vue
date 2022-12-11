@@ -258,18 +258,23 @@ export default {
     }
 
     function checkOut() {
-      let cartItems = JSON.parse(
-        JSON.stringify($store.getters["cart/getCartItems"])
-      );
-      for (let item in cartItems) {
-        delete cartItems[item].quantity;
+      // let cartItems = JSON.parse(
+      //   JSON.stringify($store.getters["cart/getCartItems"])
+      // );
+      // for (let item in cartItems) {
+      //   delete cartItems[item].quantity;
+      // }
+      if (!cartQuantity.value) {
+        errorNotification("No items in cart");
+        return;
       }
       const payload = {
         auth_token: loginDetails.value.auth_token,
         data: {
           ...formData,
-          user: loginDetails.value.user_information,
-          products: cartItems,
+          user: loginDetails.value.user_information.id,
+          products: cartItems.value,
+          // products: cartItems,
           stripe_token: "Ragnarok",
           paid_amount: getCartTotal.value,
         },
