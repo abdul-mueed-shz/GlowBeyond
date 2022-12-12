@@ -7,22 +7,16 @@
 <h4>A Full stack ecommerce application made using quasar 2 for frontend and django rest framework for backend. The application is coupled with [auth-application](https://github.com/Abdul-Mueed-Shahbaz/Auth-Application) for login and jwt token authentication.</h4>
 
 
-
-#
-### How to couple the authentication application with another
-* You can configure the app to be coupled by another app for authentication by adding the required information in COUPLED_APPS object in app.js
-* The Coupled application's required information includes the application name, Icon's name to be displayed(Place the app icon in assets/icons) and the url of the application to be verified
-* The jwt token recieved on successful authentication includes the user's email and id present in the login app's database. The coupled app needs to be configured in such a way that the token should be included in the HTTP request's header or cookie with the key of auth_token. The backend of the coupled app needs to implement the appropirate authentication mechanism to check the availibity/validity of the token
-#
-
  Main Features</h2>
 
-* Complete input fields validation(Frontend)
-* Input fields can easily be modified/added by changing the concerned objects in reactive.js file
-* Completely responsive
-* State managed properly using vuex
+* Feature to list all the latest products on the home page
+* Categories of summer and winter are available. Products are classified based on these categories
+* A product details page with all the information about the product with the feature of adding the product to cart along with the quantity specified
+* A cart page with all the products along with their quantity added in the cart listed in tabular form. The quantity can be increased or decreased  and the products can be deleted/removed from the cart directly from the table.
 * Proper error handling
-* The auth app redirects to the coupled app along with the auth_token property with the value of jwt token in the query string
+* Proper error and success notifications
+* Jwt token authentication using the authentication application linked in the description. 
+* An account details page with the user information, available user coupons and the user orders.
 * The application uses mysql as the database
 
 #
@@ -58,6 +52,10 @@
 ![Checkout](https://user-images.githubusercontent.com/52679916/207143485-048a50e6-ddf4-48d7-b57c-c49ff39ea3a5.png)
 
 <h2><img width="30px" src="https://www.animatedimages.org/data/media/491/animated-television-image-0134.gif" border="0" alt="animated-television-image-0134" />
+
+### How to add products
+* There is no role based views feature available yet. So the only way to add the products is using django-admin
+#
 
 
 <h2><img width="30px" src="https://www.animatedimages.org/data/media/318/animated-computer-smiley-image-0080.gif" border="0" alt="animated-computer-smiley-image-0080" />  Commands:</h2>
