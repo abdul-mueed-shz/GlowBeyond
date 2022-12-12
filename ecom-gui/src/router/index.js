@@ -1,5 +1,6 @@
 import { route } from "quasar/wrappers";
 import { APP_CONSTANTS } from "src/common/constants/app";
+import { APP_ROUTES } from "src/common/constants/_routes";
 import { errorNotification } from "src/common/utils/notifications";
 import { computed } from "vue";
 import {
@@ -50,6 +51,7 @@ export default route(function ({ store }) {
   Router.beforeEach((to, from, next) => {
     if (to.meta.requireAuthentication && !loginDetails.value) {
       errorNotification("Unauthenticated");
+      next({ path: from.path });
       return;
     }
     next();

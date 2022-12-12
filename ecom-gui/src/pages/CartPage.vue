@@ -163,7 +163,6 @@ export default {
   name: "CartPage",
   components: {
     "cart-items": CartItems,
-    //
   },
   setup() {
     // Variables
@@ -292,6 +291,7 @@ export default {
           console.log("Called on OK or Cancel");
         });
     }
+
     return {
       cartItems,
       columns,

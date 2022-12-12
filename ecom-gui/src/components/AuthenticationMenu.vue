@@ -34,10 +34,7 @@
           </div>
         </q-card-section>
         <q-card-section v-else>
-          <div
-            @click="redirectToLogin"
-            class="row flex flex-center cursor-pointer"
-          >
+          <div @click="login" class="row flex flex-center cursor-pointer">
             <q-icon name="mdi-login" class="q-my-md" size="25px"></q-icon>
             <div style="font-size: large" class="q-ml-sm text-weight-medium">
               Login
@@ -52,9 +49,9 @@
 <script>
 import { computed, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
-import { errorNotification } from "src/common/utils/notifications";
 import { useRouter } from "vue-router";
 import { APP_ROUTES } from "src/common/constants/_routes";
+import { logout, redirectToLogin } from "src/common/utils/functions";
 
 export default {
   name: "AuthenticationDetails",
@@ -68,36 +65,6 @@ export default {
     const loginDetails = computed(() => {
       return $store.getters["login/getLoginDetails"];
     });
-
-    // Functions
-    function getRequiredGlobals() {
-      const appName = app.appContext.config.globalProperties.$appName;
-      const loginAppUrl = app.appContext.config.globalProperties.$loginAppUrl;
-      if (appName && loginAppUrl) {
-        return { appName, loginAppUrl };
-      }
-    }
-    function redirectToLogin() {
-      const requiredGlobals = getRequiredGlobals();
-      if (!requiredGlobals) {
-        errorNotification("Service currently unavailable");
-        return;
-      }
-      const queryStringObject = {
-        app_name: requiredGlobals.appName,
-        redirect_url: window.location.origin,
-      };
-      const queryString =
-        "?" + new URLSearchParams(queryStringObject).toString();
-      window.location.href = requiredGlobals.loginAppUrl + queryString;
-    }
-    async function logout() {
-      $store.dispatch("login/callLogout");
-      $store.dispatch("login/setLoginDetails", null);
-      const intervalId = $store.getters["login/getIntervalId"];
-      clearInterval(intervalId);
-      $store.dispatch("login/setIntervalId", null);
-    }
     function getFullName() {
       return (
         loginDetails.value.user_information.first_name +
@@ -108,10 +75,12 @@ export default {
     function toAccountDetails() {
       $router.push({ name: APP_ROUTES.ACCOUNT_DETAILS.NAME });
     }
-
+    function login() {
+      redirectToLogin(app);
+    }
     // Exposed properties
     return {
-      redirectToLogin,
+      login,
       logout,
       getFullName,
       loginDetails,

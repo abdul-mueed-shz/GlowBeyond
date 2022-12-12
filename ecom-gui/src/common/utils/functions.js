@@ -65,3 +65,31 @@ export async function deleteFromCart(product) {
     errorNotification("Failed to remove from cart");
   }
 }
+export async function logout() {
+  $store.dispatch("login/callLogout");
+  $store.dispatch("login/setLoginDetails", null);
+  const intervalId = $store.getters["login/getIntervalId"];
+  clearInterval(intervalId);
+  $store.dispatch("login/setIntervalId", null);
+}
+
+function getRequiredGlobals(app) {
+  const appName = app.appContext.config.globalProperties.$appName;
+  const loginAppUrl = app.appContext.config.globalProperties.$loginAppUrl;
+  if (appName && loginAppUrl) {
+    return { appName, loginAppUrl };
+  }
+}
+export function redirectToLogin(app) {
+  const requiredGlobals = getRequiredGlobals(app);
+  if (!requiredGlobals) {
+    errorNotification("Service currently unavailable");
+    return;
+  }
+  const queryStringObject = {
+    app_name: requiredGlobals.appName,
+    redirect_url: window.location.origin,
+  };
+  const queryString = "?" + new URLSearchParams(queryStringObject).toString();
+  window.location.href = requiredGlobals.loginAppUrl + queryString;
+}

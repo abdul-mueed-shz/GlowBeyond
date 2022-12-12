@@ -63,3 +63,16 @@ export async function search({ state, commit }, queryParams) {
     console.log(err);
   }
 }
+export async function consumedProducts({ commit }, payload) {
+  try {
+    const url = "consumed-products";
+    const config = {
+      params: payload.queryParams,
+      headers: { AUTHTOKEN: payload.auth_token },
+    };
+    const result = await api.get(url, config);
+    return result.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
