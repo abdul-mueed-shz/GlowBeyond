@@ -1,67 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ee4d03a-9d00-4ad2-bf26-c6512e1dc9e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ecom/apps/commons/utils/constants.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/commons/utils/functions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/api/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/api/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/api/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/api/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/migrations/0002_alter_product_price.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/apps/product/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/config/media/uploads/1457543.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/config/media/uploads/1457543_F42qaWg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/config/media/uploads/254624660_317425480387133_2631602512173192502_n.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/config/media/uploads/291738875_542130721030916_4597786335768075216_n.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/config/settings/development.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom/config/settings/production.py" afterDir="false" />
+    <list default="true" id="d084d1af-31af-4480-b36f-2ce850cacd94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/ecom-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ecom-api.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/apps/common/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecom/apps/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/apps/common/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/apps/common/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecom/apps/product/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/apps/common/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecom/apps/commons/utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/apps/common/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/apps/common/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecom/apps/product/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/apps/common/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/config/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecom/config/settings/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecom/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecom/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/quasar.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ecom-gui/ecom/quasar.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/boot/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ecom-gui/ecom/src/boot/axios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/components/EssentialLink.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/css/quasar.variables.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../ecom-gui/ecom/src/css/quasar.variables.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/layouts/MainLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ecom-gui/ecom/src/layouts/MainLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/pages/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ecom-gui/ecom/src/pages/HomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ecom-gui/ecom/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ecom-gui/ecom/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ecom-gui/ecom/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/store/module-example/actions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/store/module-example/getters.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/store/module-example/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/store/module-example/mutations.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ecom-gui/ecom/src/store/module-example/state.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-  <component name="FormatOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -69,7 +17,8 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2GDiyTiy0UMSkdJNdgRkSEDDqX5" />
+  <component name="ProjectId" id="2HiPbNLQk63lp1R532LT9axJbzj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -78,81 +27,24 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/1-PROJECTS/E-Commerce Application/ecom-api/ecom/apps/product&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;
+    &quot;last_opened_file_path&quot;: &quot;E:/1-PROJECTS/EcomApp/Eccomerce-Application/ecom-api/build&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\1-PROJECTS\E-Commerce Application\ecom-api\ecom\apps\product" />
-      <recent name="E:\1-PROJECTS\E-Commerce Application\ecom-api\ecom\apps" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\1-PROJECTS\E-Commerce Application\ecom-api\ecom\apps\product\api" />
-      <recent name="E:\1-PROJECTS\E-Commerce Application\ecom-api\ecom\apps\commons" />
-      <recent name="E:\1-PROJECTS\E-Commerce Application\ecom-api\ecom\apps\products\api" />
-      <recent name="E:\1-PROJECTS\E-Commerce Application\ecom-api\ecom\config\settings" />
-      <recent name="E:\1-PROJECTS\E-Commerce Application\ecom-api\ecom" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Python.Runserver">
-    <configuration name="MakeMigrations" type="PythonConfigurationType" factoryName="Python">
+  <component name="RunManager">
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="ecom-api" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ecom" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_HOME" value="E:\1-PROJECTS\E-Commerce Application\ecom-api\build\build-env\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ecom/manage.py" />
-      <option name="PARAMETERS" value="makemigrations" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Migrate" type="PythonConfigurationType" factoryName="Python">
-      <module name="ecom-api" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ecom" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ecom/manage.py" />
-      <option name="PARAMETERS" value="migrate" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2">
-        <option name="RunConfigurationTask" enabled="true" run_configuration_name="MakeMigrations" run_configuration_type="PythonConfigurationType" />
-      </method>
-    </configuration>
-    <configuration name="Runserver" type="PythonConfigurationType" factoryName="Python">
-      <module name="ecom-api" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ecom" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ecom/manage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
       <option name="PARAMETERS" value="runserver 8081" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -161,20 +53,15 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.Runserver" />
-      <item itemvalue="Python.MakeMigrations" />
-      <item itemvalue="Python.Migrate" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4ee4d03a-9d00-4ad2-bf26-c6512e1dc9e5" name="Changes" comment="" />
-      <created>1665929809976</created>
+      <changelist id="d084d1af-31af-4480-b36f-2ce850cacd94" name="Changes" comment="" />
+      <created>1668765003823</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1665929809976</updated>
+      <updated>1668765003823</updated>
     </task>
     <servers />
   </component>
