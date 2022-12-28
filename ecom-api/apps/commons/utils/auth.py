@@ -12,7 +12,7 @@ class JwtAuthentication(authentication.BaseAuthentication):
             raise AuthenticationFailed("Unauthenticated")
 
         try:
-            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+            payload = jwt.decode(token, 'ragnaroks_auth_application', algorithms=['HS256'])
             user = User.objects.filter(email=payload['email']).first()
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed("Unauthenticated")
