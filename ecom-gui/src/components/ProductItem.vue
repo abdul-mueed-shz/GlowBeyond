@@ -1,26 +1,26 @@
 <template>
   <div class="col-12 col-sm-6 col-md-4 q-pa-md">
-    <q-card class="full-height">
+    <q-card class="full-height product-card">
       <q-card-section>
         <q-img class="image-area" :src="product.get_thumbnail"></q-img>
       </q-card-section>
       <q-card-section class="column">
-        <div class="text-h4 text-weight-medium q-mb-lg">
+        <div class="text-h4 text-weight-medium q-pb-lg">
           {{ product.name }}
         </div>
         <div class="text-body1 text-weight-medium">
-          <div class="q-mb-sm">
+          <div class="overflow-ellipsis prod-desc">
             {{ product.description }}
           </div>
-          <div>
-            {{ `${+product.price} Rs` }}
+          <div class="q-pt-md text-weight-bolder">
+            {{ `Price: ${+product.price} Rs` }}
           </div>
         </div>
       </q-card-section>
       <q-card-actions class="flex flex-center q-pb-lg">
         <q-btn
           @click="goToDetails"
-          color="primary"
+          color="secondary"
           :label="MAP.HOMEPAGE.VIEWDETAILS"
         ></q-btn>
       </q-card-actions>
@@ -70,5 +70,8 @@ function goToDetails() {
 .image-area {
   max-width: 500px;
   max-height: 300px;
+}
+.prod-desc {
+  max-height: 140px;
 }
 </style>
