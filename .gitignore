@@ -1,1 +1,7 @@
 /ecom-api/build/build-env/
+/ecom-api/.idea
+**/.idea
+/SS
+/ecom-api/config/media/
+**/__pycache__
+*.deb
