@@ -5,3 +5,4 @@
 /ecom-api/config/media/
 **/__pycache__
 *.deb
+ecom-api/.vscode/launch.json
