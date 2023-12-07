@@ -249,10 +249,10 @@ export default {
         errorNotification("No items in cart");
         return;
       }
-      if (!loginDetails.value) {
-        errorNotification("Unauthenticated! Please login");
-        return;
-      }
+      // if (!loginDetails.value) {
+      //   errorNotification("Unauthenticated! Please login");
+      //   return;
+      // }
       onCheckout.value = val;
     }
 
