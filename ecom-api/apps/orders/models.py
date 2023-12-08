@@ -25,6 +25,11 @@ class Customer(BaseModel):
 class Order(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     paid_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_method = models.ForeignKey(
+        PaymentMethod,
+        on_delete=models.CASCADE,
+        default=PaymentMethod.objects.filter(name="COD").first().id,
+    )
 
     class Meta:
         db_table = "order"
@@ -36,7 +41,7 @@ class OrderItems(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
-    class Meta:
+    class Meta:1
         db_table = "order-items"
         verbose_name = "Order Item"
         verbose_name_plural = "Order Items"
