@@ -41,7 +41,7 @@ class OrderItems(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
-    class Meta:1
+    class Meta:
         db_table = "order-items"
         verbose_name = "Order Item"
         verbose_name_plural = "Order Items"
