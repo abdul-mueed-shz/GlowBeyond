@@ -6,21 +6,19 @@ from .models import Product, Category
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     fields = [
-        'category',
-        'name',
-        'slug',
-        'description',
-        'price',
-        'image',
-        'thumbnail',
-
+        "category",
+        "name",
+        "slug",
+        "description",
+        "price",
+        "image",
+        "thumbnail",
     ]
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     fields = [
-        'name',
-        'slug',
-
+        "name",
+        "slug",
     ]
