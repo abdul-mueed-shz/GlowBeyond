@@ -1,6 +1,6 @@
 <template>
-  <div class="col-12 col-sm-6 col-md-4 q-pa-md">
-    <q-card class="full-height product-card">
+  <div class="col-12 col-sm-6 col-md-3 q-pa-md">
+    <q-card class="full-height product-card border-radius__12px">
       <q-card-section>
         <q-img class="image-area" :src="product.get_thumbnail"></q-img>
       </q-card-section>
@@ -19,6 +19,8 @@
       </q-card-section>
       <q-card-actions class="flex flex-center q-pb-lg">
         <q-btn
+          no-caps
+          class="border-radius__8px"
           @click="goToDetails"
           color="secondary"
           :label="MAP.HOMEPAGE.VIEWDETAILS"
@@ -69,7 +71,8 @@ function goToDetails() {
 }
 .image-area {
   max-width: 500px;
-  max-height: 300px;
+  max-height: 250px;
+  height: 250px;
 }
 .prod-desc {
   max-height: 140px;

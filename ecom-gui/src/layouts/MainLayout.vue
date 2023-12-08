@@ -4,7 +4,7 @@
 <!-- TODO: MAKE UTIL FUNCTIONS FOR CART ITEM DECREMENT INCREMENT AND REMOVAL IN CART ITEMS COMPONENT -->
 
 <template>
-  <q-layout view="hHh Lpr lFf">
+  <q-layout view="lHh LpR lff">
     <q-header :elevated="$route.name != APP_ROUTES.HOME.NAME">
       <q-toolbar>
         <q-btn
@@ -36,19 +36,19 @@
     </q-header>
     <q-drawer
       v-model="leftDrawerOpen"
-      :mini="miniState"
-      :breakpoint="10"
       :width="250"
       show-if-above
       :bordered="$route.name != APP_ROUTES.HOME.NAME"
       class="bg-primary text-white"
     >
-      <main-menu
-        v-for="item in menuList"
-        :key="item.name"
-        :item="item"
-        :mini-state="miniState"
-      />
+      <div class="q-pt-md">
+        <main-menu
+          v-for="item in menuList"
+          :key="item.name"
+          :item="item"
+          :mini-state="miniState"
+        />
+      </div>
     </q-drawer>
     <q-page-container>
       <q-ajax-bar ref="bar" position="bottom" color="accent" size="10px" />
@@ -106,7 +106,8 @@ export default {
 
     // FUNCTIONS
     function toggleLeftDrawer() {
-      $store.commit("app/toggleMiniState");
+      leftDrawerOpen.value = !leftDrawerOpen.value;
+      // $store.commit("app/toggleMiniState");
     }
 
     function searchProducts(query) {

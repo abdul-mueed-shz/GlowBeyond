@@ -1,13 +1,11 @@
 <template>
   <q-item
+    dense
     clickable
     active-class="bg-white text-primary"
     @click="navigate"
     :active="selectedMenuItem === item.name"
   >
-    <q-item-section avatar>
-      <q-avatar :size="item.icon.size" :icon="item.icon.name"></q-avatar>
-    </q-item-section>
     <q-item-section class="q-ml-sm text-weight-medium">
       {{ item.label }}
       {{ item.name === APP_ROUTES.CART.NAME ? `(${cartQuantity})` : "" }}

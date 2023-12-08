@@ -14,7 +14,7 @@
         >
           <q-card-section>
             <q-img
-              style="max-width: 300px; max-height: 190px"
+              style="max-width: 300px; height: 150px"
               :src="product.get_thumbnail"
             ></q-img>
           </q-card-section>
