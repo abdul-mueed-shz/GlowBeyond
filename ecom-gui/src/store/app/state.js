@@ -17,7 +17,9 @@ export default function () {
           BODY: "The best skincare store in Pakistan!",
         },
         LATESTPRODUCTS: "Latest Products",
+        HOLIDAY_GIFT_GUIDE: "Holiday gift guide",
         VIEWDETAILS: "View details",
+        ADD_TO_BAD: "Add to bag",
       },
       Link: {
         Routes: {

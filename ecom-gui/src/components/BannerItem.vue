@@ -1,6 +1,10 @@
 <template>
-  <q-banner class="bg-primary text-white text-center" style="min-height: 22rem">
-    <div>
+  <q-banner
+    class="bg-primary text-white text-center row"
+    style="min-height: 32rem"
+  >
+    <div class="col-6">F</div>
+    <div class="col-6">
       <div :class="headerClass" class="q-mb-lg">
         {{ MAP.HOMEPAGE.GREETINGS.HEADING }}
       </div>

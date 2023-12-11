@@ -12,7 +12,7 @@
       />
     </div>
     <div id="cart-state" class="q-mt-xl">
-      <q-card id="summary" class="full-width">
+      <q-card flat bordered id="summary" class="full-width border-radius__12px">
         <q-card-section class="text-h4 text-primary text-weight-medium">
           <div v-if="!onCheckout" id="summary-title">
             {{ MAP.CART_PAGE.CARD_TITLES["SUMMARY"] }}

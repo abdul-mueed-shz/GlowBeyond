@@ -1,0 +1,1 @@
+ORDER_CREATION_NOTIF_TO_ADMIN = f"This email is to notify you about a new order created under the name {0}, of amount {1} having the following products {3}. The delivery address is {4}. Refer to the admin panel for further information"

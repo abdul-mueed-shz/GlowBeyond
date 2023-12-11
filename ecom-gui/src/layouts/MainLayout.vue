@@ -5,8 +5,19 @@
 
 <template>
   <q-layout view="lHh LpR lff">
-    <q-header :elevated="$route.name != APP_ROUTES.HOME.NAME">
-      <q-toolbar>
+    <q-header>
+      <div class="bg-notif-message q-py-sm flex flex-center text-weight-medium">
+        <span>Free shipping above order 300 Dhs</span>
+        <span>
+          <q-icon
+            name="mdi-arrow-right"
+            flat
+            class="cursor-pointer q-px-xs"
+            size="sm"
+          ></q-icon>
+        </span>
+      </div>
+      <q-toolbar class="bg-white text-secondary q-px-xl">
         <q-btn
           flat
           dense
@@ -15,20 +26,48 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-        <q-toolbar-title>
-          {{ MAP.APPNAME }}
-        </q-toolbar-title>
+        <q-space></q-space>
+        <div>
+          <q-img
+            class="cursor-pointer"
+            @click="() => $router.push(APP_ROUTES.HOME.PATH)"
+            src="../assets/LOGO.png"
+            width="200px"
+          ></q-img>
+        </div>
+        <q-space></q-space>
+        <q-btn
+          v-if="!toggleSearch"
+          flat
+          @click="() => (toggleSearch = !toggleSearch)"
+          icon="mdi-magnify"
+          round
+        ></q-btn>
         <q-input
-          class="bg-white rounded-borders q-my-sm"
+          v-else
+          class="bg-white rounded-borders"
           dense
-          filled
-          label="Search"
+          :placeholder="!search && 'Search'"
           v-model="search"
           @update:model-value="searchProducts"
-          debounce="500"
+          debounce="1000"
+          clearable
         >
+          <template #prepend>
+            <q-icon
+              class="cursor-pointer"
+              @click="searchProducts"
+              name="mdi-magnify"
+            ></q-icon>
+          </template>
           <template #append>
-            <q-btn flat @click="searchProducts" icon="mdi-magnify"></q-btn>
+            <q-icon
+              class="cursor-pointer"
+              @click="() => (toggleSearch = !toggleSearch)"
+              name="mdi-close"
+            >
+              <q-tooltip> Close search </q-tooltip></q-icon
+            >
           </template>
         </q-input>
         <AuthMenu />
@@ -37,9 +76,7 @@
     <q-drawer
       v-model="leftDrawerOpen"
       :width="250"
-      show-if-above
       :bordered="$route.name != APP_ROUTES.HOME.NAME"
-      class="bg-primary text-white"
     >
       <div class="q-pt-md">
         <main-menu
@@ -72,6 +109,7 @@ export default {
   },
   setup() {
     // CONSTANTS
+    const toggleSearch = ref(false);
     const app = getCurrentInstance();
 
     const search = ref("");
@@ -166,6 +204,7 @@ export default {
     });
 
     return {
+      toggleSearch,
       leftDrawerOpen,
       MAP,
       selectedMenuItem,

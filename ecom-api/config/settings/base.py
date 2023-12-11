@@ -10,20 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR.parent, ".env"))
+
+
+SECRET_KEY = env.str("SECRET_KEY", "")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-c)68zpq9**$_=%)$$&@qm8xt_0k7yb#kxwv&=1p0z48nr+&c3x"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -140,7 +144,18 @@ MEDIA_ROOT = BASE_DIR / "media/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 STRIPE_SECRET_KEY = "ragnarok"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = ["AUTHTOKEN", "content-type"]
 # AUTH_USER_MODEL = 'user.User'
+
+
+# To include the SMTP in backend
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER", None)
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD", None)
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# encryption
+OTP_LENGTH = 6  # Otp string length
+CRYPTO_CIPHER_KEY = env.str("CRYPTO_CIPHER_KEY", None)  # Your key for otp encryption
+CRYPTO_CIPHER_IV = env.str("CRYPTO_CIPHER_IV", None)  # Your iv for otp encryption

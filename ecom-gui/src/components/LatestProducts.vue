@@ -1,8 +1,11 @@
 <template>
-  <div class="text-weight-bold text-grey-9 text-h4 text-center q-ma-xl">
-    {{ MAP.HOMEPAGE.LATESTPRODUCTS }}
+  <div class="text-weight-medium text-secondary text-h4 text-center q-pt-xl">
+    {{ MAP.HOMEPAGE.HOLIDAY_GIFT_GUIDE }}
   </div>
-  <div class="row q-pa-lg q-gutter-y-md text-center text-grey-9">
+  <div
+    class="row q-pt-lg q-gutter-y-md text-center text-grey-9"
+    :class="$q.screen.gt.xs && 'q-px-lg'"
+  >
     <product-item
       v-for="product in props.productList"
       :key="product.name"

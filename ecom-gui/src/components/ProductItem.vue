@@ -1,30 +1,37 @@
 <template>
   <div class="col-12 col-sm-6 col-md-3 q-pa-md">
-    <q-card class="full-height product-card border-radius__12px">
+    <q-card flat class="full-height border-radius__12px cursor-pointer">
       <q-card-section>
-        <q-img class="image-area" :src="product.get_thumbnail"></q-img>
+        <q-img
+          @click="goToDetails"
+          class="image-area"
+          :src="product.get_thumbnail"
+          style="min-height: 430px"
+        ></q-img>
       </q-card-section>
-      <q-card-section class="column">
-        <div class="text-h4 text-weight-medium q-pb-lg">
+      <q-card-section class="column q-py-none">
+        <div class="q-pb-lg">
           {{ product.name }}
         </div>
-        <div class="text-body1 text-weight-medium">
+        <div>
+          {{ `${+product.price}Dhs` }}
+        </div>
+        <div class="text-grey-7">
           <div class="overflow-ellipsis prod-desc">
             {{ product.description }}
           </div>
-          <div class="q-pt-md text-weight-bolder">
-            {{ `Price: ${+product.price} Rs` }}
-          </div>
         </div>
       </q-card-section>
-      <q-card-actions class="flex flex-center q-pb-lg">
-        <q-btn
-          no-caps
-          class="border-radius__8px"
-          @click="goToDetails"
-          color="secondary"
-          :label="MAP.HOMEPAGE.VIEWDETAILS"
-        ></q-btn>
+      <q-card-actions class="q-py-lg">
+        <div class="full-width">
+          <q-btn
+            @click="addToCart(product, 1)"
+            outline
+            class="full-width"
+            color="secondary"
+            :label="MAP.HOMEPAGE.ADD_TO_BAD"
+          ></q-btn>
+        </div>
       </q-card-actions>
     </q-card>
   </div>
@@ -35,7 +42,7 @@ import ProductItem from "./ProductItem.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { toProductDetails } from "src/common/utils/functions";
+import { addToCart, toProductDetails } from "src/common/utils/functions";
 
 const props = defineProps({
   product: {
