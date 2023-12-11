@@ -1,15 +1,19 @@
+from django.conf import settings
 from django.core.mail import send_mail
 
 
-def send_mail_to_admin():
-    receiver = "abdulmueedshahbaz@gmail.com"
+def init_send_mail(
+    subject,
+    body,
+    recipient,
+    sender=settings.EMAIL_HOST_USER,
+):
     try:
-        message = "Dear Anon, I hope this email finds you well."
         send_mail(
-            "Greetings",
-            message,
-            "abdul.mueed.shz.dev@gmail.com",
-            [receiver],
+            subject,
+            body,
+            sender,
+            [recipient],
             fail_silently=False,
         )
         return {"success": True, "message": "Email sent successfully"}

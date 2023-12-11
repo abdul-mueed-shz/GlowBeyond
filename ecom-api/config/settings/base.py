@@ -148,6 +148,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # To include the SMTP in backend
+ADMIN_RECIEVER_EMAIL = env.str("ADMIN_RECIEVER_EMAIL", None)
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST_USER = env.str("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD", None)
