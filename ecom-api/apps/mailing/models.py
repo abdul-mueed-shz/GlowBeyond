@@ -7,6 +7,7 @@ EMAIL_STATUS_CHOICES = [
     ("PENDING", "pending"),
     ("SENT", "sent"),
     ("FAILED", "failed"),
+    ("RETRY", "retry"),
 ]
 
 
@@ -33,3 +34,10 @@ class Mailing(BaseModel):
     class Meta:
         db_table = "mailing"
         verbose_name = "Mailing"
+
+    def __str__(self) -> str:
+        return f"""
+                From: {self.sender},
+                To: {self.recipient},
+                Subject: {self.subject}        
+                """

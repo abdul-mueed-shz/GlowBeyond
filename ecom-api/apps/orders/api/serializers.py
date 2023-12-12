@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from apps.payment.models import PaymentMethod
 from ..models import Customer, Order, OrderItems
 from ...product.models import Product
 
@@ -12,6 +14,12 @@ class CustomerSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     customer = serializers.PrimaryKeyRelatedField(
         queryset=Customer.objects.all(), many=False
+    )
+    payment_method = serializers.PrimaryKeyRelatedField(
+        required=False,
+        queryset=PaymentMethod.objects.all(),
+        many=False,
+        default=PaymentMethod.objects.get(name="COD"),
     )
 
     class Meta:
