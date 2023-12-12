@@ -25,11 +25,7 @@ class Customer(BaseModel):
 class Order(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     paid_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_method = models.ForeignKey(
-        PaymentMethod,
-        on_delete=models.CASCADE,
-        default=PaymentMethod.objects.filter(name="COD").first().id,
-    )
+    payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
 
     class Meta:
         db_table = "order"

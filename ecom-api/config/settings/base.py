@@ -53,6 +53,7 @@ LOCAL_APPS = [
     "apps.user.apps.UserConfig",
     "apps.orders.apps.OrdersConfig",
     "apps.payment.apps.PaymentConfig",
+    "apps.mailing.apps.MailingConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
