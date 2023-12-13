@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.payment.models import PaymentMethod
-from ..models import Customer, Order, OrderItems
+from ..models import Customer, DeliveryStatus, Order, OrderItems
 from ...product.models import Product
 
 
@@ -20,6 +20,12 @@ class OrderSerializer(serializers.ModelSerializer):
         queryset=PaymentMethod.objects.all(),
         many=False,
         default=PaymentMethod.objects.get(name="COD"),
+    )
+    delivery_status = serializers.PrimaryKeyRelatedField(
+        required=False,
+        queryset=DeliveryStatus.objects.all(),
+        many=False,
+        default=DeliveryStatus.objects.get(name="PENDING"),
     )
 
     class Meta:

@@ -37,9 +37,11 @@
             <div class="q-mb-md text-h6 text-weight-regular text-primary">
               * All fields are mandatory
             </div>
-            <div class="row q-gutter-y-md">
-              <div class="col-4 q-px-sm">
+            <div class="row q-gutter-y-xs">
+              <div class="col-12 col-sm-4 q-px-sm">
                 <q-input
+                  class="border-radius__8px"
+                  dense
                   clearable
                   v-model="formData.first_name"
                   outlined
@@ -50,8 +52,10 @@
                   ]"
                 />
               </div>
-              <div class="col-4 q-px-sm">
+              <div class="col-12 col-sm-4 q-px-sm">
                 <q-input
+                  class="border-radius__8px"
+                  dense
                   clearable
                   v-model="formData.last_name"
                   outlined
@@ -62,8 +66,10 @@
                   ]"
                 />
               </div>
-              <div class="col-4 q-px-sm">
+              <div class="col-12 col-sm-4 q-px-sm">
                 <q-input
+                  class="border-radius__8px"
+                  dense
                   clearable
                   v-model="formData.email"
                   outlined
@@ -74,8 +80,10 @@
                   ]"
                 />
               </div>
-              <div class="col-4 q-px-sm">
+              <div class="col-12 col-sm-4 q-px-sm">
                 <q-input
+                  class="border-radius__8px"
+                  dense
                   clearable
                   v-model="formData.phone"
                   type="number"
@@ -87,8 +95,10 @@
                   ]"
                 />
               </div>
-              <div class="col-4 q-px-sm">
+              <div class="col-12 col-sm-4 q-px-sm">
                 <q-input
+                  class="border-radius__8px"
+                  dense
                   clearable
                   v-model="formData.address"
                   outlined
@@ -99,8 +109,10 @@
                   ]"
                 />
               </div>
-              <div class="col-4 q-px-sm">
+              <div class="col-12 col-sm-4 q-px-sm">
                 <q-input
+                  class="border-radius__8px"
+                  dense
                   clearable
                   v-model="formData.city"
                   outlined
@@ -111,8 +123,10 @@
                   ]"
                 />
               </div>
-              <div class="col-4 q-px-sm">
+              <div class="col-12 col-sm-4 q-px-sm">
                 <q-input
+                  class="border-radius__8px"
+                  dense
                   clearable
                   v-model="formData.zip_code"
                   outlined
@@ -133,15 +147,15 @@
               style="width: 180px"
               :label="MAP.BTN['CHECKOUT']"
             ></q-btn>
-            <div v-else class="q-ml-md">
+            <div v-else class="q-ml-md q-gutter-x-sm">
               <q-btn
                 @click="toggleCheckout(false)"
-                class="text-white bg-negative q-mb-md btn-measurements"
+                class="text-white bg-negative q-mb-md btn-measurements border-radius__8px"
                 :label="MAP.BTN['CANCEL']"
               ></q-btn>
               <q-btn
                 type="submit"
-                class="text-white bg-primary q-mb-md q-ml-md btn-measurements"
+                class="text-white bg-primary q-mb-md btn-measurements border-radius__8px"
                 :label="MAP.BTN['PAY']"
               ></q-btn>
             </div>

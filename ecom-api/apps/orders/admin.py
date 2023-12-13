@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.orders.models import Customer, Order, OrderItems
+from apps.orders.models import Customer, DeliveryStatus, Order, OrderItems
 
 # Register your models here.
 admin.site.register(Customer)
@@ -25,3 +25,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItems)
+admin.site.register(DeliveryStatus)

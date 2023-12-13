@@ -4,6 +4,28 @@ from apps.commons.models import BaseModel
 from apps.payment.models import PaymentMethod
 from apps.product.models import Product
 
+DELIVERY_STATUS = [
+    ("PENDING", "Pending"),
+    ("PROCESSING", "Processing"),
+    ("SHIPPED", "Shipped"),
+    ("OUT_FOR_DELIVERY", "Out for Delivery"),
+    ("DELIVERED", "Delivered"),
+    ("CANCELLED", "Cancelled"),
+    ("RETURNED", "Returned"),
+]
+
+
+class DeliveryStatus(models.Model):
+    name = models.CharField(max_length=255, choices=DELIVERY_STATUS, unique=True)
+
+    class Meta:
+        db_table = "delivery-status"
+        verbose_name = "Delivery Status"
+        verbose_name_plural = "Delivery Statuses"
+
+    def __str__(self):
+        return self.name
+
 
 class Customer(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -26,6 +48,9 @@ class Order(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     paid_amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
+    delivery_status = models.ForeignKey(
+        DeliveryStatus, on_delete=models.CASCADE, null=True, blank=True
+    )
 
     class Meta:
         db_table = "order"
