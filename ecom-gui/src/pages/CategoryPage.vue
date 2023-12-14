@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div id="title" class="text-h4 text-primary text-weight-medium">
+    <div id="title" class="text-h4 text-primary text-weight-medium q-px-md">
       {{ capitalizeFirstLetter(selectedCategory?.label) }}
     </div>
     <q-separator class="q-mb-md"></q-separator>
