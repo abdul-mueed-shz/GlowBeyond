@@ -21,7 +21,7 @@ import routes from "./routes";
  */
 
 export default route(function ({ store }) {
-  const Map = computed(() => {
+  const map = computed(() => {
     return store.getters["app/getMAP"];
   });
   const loginDetails = computed(() => {
@@ -43,9 +43,9 @@ export default route(function ({ store }) {
       process.env.MODE === "ssr" ? void 0 : process.env.VUE_ROUTER_BASE
     ),
   });
-  Router.afterEach((to, from) => {
+  Router.afterEach((to, _) => {
     document.title = `${APP_CONSTANTS.APP_NAME} | ${
-      Map.value.Link.Routes[to.name]
+      map.value.Link.Routes[to.name] ?? ""
     }`;
   });
   Router.beforeEach((to, from, next) => {

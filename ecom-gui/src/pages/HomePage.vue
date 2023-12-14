@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="q-pb-md">
     <BannerItem />
     <LatestProducts :product-list="productList" />
   </q-page>

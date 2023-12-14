@@ -19,7 +19,7 @@ export default function () {
         LATESTPRODUCTS: "Latest Products",
         HOLIDAY_GIFT_GUIDE: "Holiday gift guide",
         VIEWDETAILS: "View details",
-        ADD_TO_BAD: "Add to bag",
+        ADD_TO_BAG: "Add to bag",
       },
       Link: {
         Routes: {
@@ -31,6 +31,7 @@ export default function () {
           product_details: "Details",
           search_results: "Search",
           account_details: "Account",
+          category: "Category",
         },
       },
       INPUTS_LABELS: {

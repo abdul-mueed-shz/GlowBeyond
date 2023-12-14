@@ -4,7 +4,7 @@
       {{ searchLength }}
     </div>
     <q-separator class="q-mb-md"></q-separator>
-    <product-items :products="resultList" />
+    <products-list :products="resultList" />
   </q-page>
 </template>
 
@@ -15,7 +15,7 @@ import { useStore } from "vuex";
 import { APP_CONSTANTS } from "src/common/constants/app";
 export default {
   components: {
-    "product-items": ProductsList,
+    ProductsList,
   },
   name: "SearchResults",
   setup() {

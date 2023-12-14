@@ -32,22 +32,10 @@ const routes = [
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
-        path: APP_ROUTES.SUMMER.PATH,
-        name: APP_ROUTES.SUMMER.NAME,
+        path: APP_ROUTES.CATEGORY.PATH + "/:slug",
+        name: APP_ROUTES.CATEGORY.NAME,
         meta: {},
-        component: () => import("pages/SummerCollection.vue"),
-      },
-    ],
-  },
-  {
-    path: APP_ROUTES.BASE.PATH,
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
-        path: APP_ROUTES.WINTER.PATH,
-        name: APP_ROUTES.WINTER.NAME,
-        meta: {},
-        component: () => import("pages/WinterCollection.vue"),
+        component: () => import("pages/CategoryPage.vue"),
       },
     ],
   },

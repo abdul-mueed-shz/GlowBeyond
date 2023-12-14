@@ -89,7 +89,7 @@
     </q-drawer>
     <q-page-container>
       <q-ajax-bar ref="bar" position="bottom" color="accent" size="10px" />
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </q-page-container>
   </q-layout>
 </template>
@@ -100,7 +100,7 @@ import AuthMenu from "src/components/AuthenticationMenu.vue";
 import { APP_ROUTES } from "../common/constants/_routes";
 import { computed, getCurrentInstance, onMounted, ref } from "vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   components: {
@@ -114,44 +114,49 @@ export default {
 
     const search = ref("");
 
-    const $store = useStore();
+    const store = useStore();
 
-    const $router = useRouter();
+    const router = useRouter();
+
+    const route = useRoute();
 
     const leftDrawerOpen = ref(false);
 
     // COMPUTED PROPERTIES
 
     const MAP = computed(() => {
-      return $store.getters["app/getMAP"];
+      return store.getters["app/getMAP"];
     });
 
     const selectedMenuItem = computed(() => {
-      return $store.getters["menu/getSelectedMenuItem"];
+      return store.getters["menu/getSelectedMenuItem"];
     });
 
     const miniState = computed(() => {
-      return $store.getters["app/getMiniState"];
+      return store.getters["app/getMiniState"];
     });
 
     const menuList = computed(() => {
-      return $store.getters["menu/getMenuList"];
+      return store.getters["menu/getMenuList"];
     });
 
     const loginDetails = computed(() => {
-      return $store.getters["login/getLoginDetails"];
+      return store.getters["login/getLoginDetails"];
     });
 
     // FUNCTIONS
     function toggleLeftDrawer() {
       leftDrawerOpen.value = !leftDrawerOpen.value;
-      // $store.commit("app/toggleMiniState");
     }
 
     function searchProducts(query) {
-      $store.dispatch("products/search", { query }).then((res) => {
+      if (!query) {
+        router.push({ name: APP_ROUTES.HOME.NAME });
+        return;
+      }
+      store.dispatch("products/search", { query }).then((res) => {
         if (res.length > 0) {
-          $router.push(APP_ROUTES.SEARCH_RESULTS.NAME);
+          router.push({ name: APP_ROUTES.SEARCH_RESULTS.NAME });
         }
       });
     }
@@ -165,24 +170,25 @@ export default {
     }
     function setTokenWatcher() {
       if (!isTokenValid()) {
-        $store.dispatch("login/setLoginDetails", null);
+        store.dispatch("login/setLoginDetails", null);
         clearInterval(intervalId);
-        $store.dispatch("login/setIntervalId", null);
+        store.dispatch("login/setIntervalId", null);
         return;
       }
       const intervalId = setInterval(() => {
         if (!isTokenValid()) {
-          $store.dispatch("login/setLoginDetails", null);
+          store.dispatch("login/setLoginDetails", null);
           clearInterval(intervalId);
-          $store.dispatch("login/setIntervalId", null);
+          store.dispatch("login/setIntervalId", null);
         }
       }, 60000);
-      $store.dispatch("login/setIntervalId", intervalId);
+      store.dispatch("login/setIntervalId", intervalId);
     }
     onMounted(async () => {
       // headers: {
       //   AUTHTOKEN: loginDetails.value.auth_token, //the token is a variable which holds the token
       // }
+      store.dispatch("menu/setSelectedMenuItem", route.name);
       if (loginDetails.value) {
         setTokenWatcher();
         return;
@@ -196,7 +202,7 @@ export default {
           new URLSearchParams(querySearch)
         );
         if (queryObject.auth_token) {
-          await $store.dispatch("login/getAuthDetails", queryObject);
+          await store.dispatch("login/getAuthDetails", queryObject);
           setTokenWatcher();
           window.history.replaceState({}, "home", window.location.origin);
         }

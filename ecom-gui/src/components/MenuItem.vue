@@ -2,28 +2,13 @@
   <q-item
     dense
     clickable
-    active-class="bg-white text-primary"
-    @click="navigate"
-    :active="selectedMenuItem === item.name"
+    @click="() => navigate()"
+    :active="$route.fullPath === currentRoute"
   >
     <q-item-section class="q-ml-sm text-weight-medium">
       {{ item.label }}
       {{ item.name === APP_ROUTES.CART.NAME ? `(${cartQuantity})` : "" }}
     </q-item-section>
-    <q-tooltip
-      class="bg-grey-9"
-      v-if="isMinitState"
-      anchor="center right"
-      self="center left"
-    >
-      <div>
-        {{
-          item.name === APP_ROUTES.CART.NAME
-            ? `${item.tooltip}(${cartQuantity})`
-            : `${item.tooltip}`
-        }}
-      </div>
-    </q-tooltip>
   </q-item>
 </template>
 
@@ -40,26 +25,37 @@ const props = defineProps({
   },
 });
 
-const $router = useRouter();
-const $store = useStore();
+const router = useRouter();
+const store = useStore();
 
 // Computed Properties
+const currentRoute = computed(() => {
+  const itemLink = props.item?.link;
+  const route = itemLink?.NAME;
+  let fullPath = "/" + route;
+  for (const key in itemLink?.PARAMS) {
+    fullPath += "/" + itemLink?.PARAMS[key];
+  }
+  return fullPath;
+});
 const item = computed(() => {
   return props.item;
 });
 const selectedMenuItem = computed(() => {
-  return $store.getters["menu/getSelectedMenuItem"];
-});
-const isMinitState = computed(() => {
-  return $store.getters["app/getMiniState"];
+  return store.getters["menu/getSelectedMenuItem"];
 });
 const cartQuantity = computed(() => {
-  return $store.getters["cart/getCartQuantity"];
+  return store.getters["cart/getCartQuantity"];
 });
-
 // Functions
 function navigate() {
-  $store.commit("menu/setSelectedMenuItem", item.value.name);
-  $router.push(item.value.link);
+  router
+    .push({
+      name: item.value?.link?.NAME,
+      params: item.value?.link?.PARAMS,
+    })
+    .then(() => {
+      store.commit("menu/setSelectedMenuItem", item.value?.link?.NAME);
+    });
 }
 </script>

@@ -5,38 +5,28 @@ export default function () {
     menu: [
       {
         name: APP_ROUTES.HOME.NAME,
-        label: "HOME",
-        link: APP_ROUTES.HOME.PATH,
+        label: "Home",
+        link: APP_ROUTES.HOME,
         tooltip: "Home",
         icon: {
           name: "mdi-home",
           size: "",
         },
       },
-      {
-        name: APP_ROUTES.SUMMER.NAME,
-        label: "Summer",
-        link: APP_ROUTES.SUMMER.PATH,
-        tooltip: "Summer",
-        icon: {
-          name: "mdi-white-balance-sunny",
-          size: "",
-        },
-      },
-      {
-        name: APP_ROUTES.WINTER.NAME,
-        label: "Winter",
-        link: APP_ROUTES.WINTER.PATH,
-        tooltip: "Winter",
-        icon: {
-          name: "mdi-snowflake",
-          size: "",
-        },
-      },
+      // {
+      //   name: APP_ROUTES.CATEGORY.NAME,
+      //   label: "Summer",
+      //   link: APP_ROUTES.CATEGORY.PATH + "/skin-care",
+      //   tooltip: "Summer",
+      //   icon: {
+      //     name: "mdi-white-balance-sunny",
+      //     size: "",
+      //   },
+      // },
       {
         name: APP_ROUTES.CART.NAME,
         label: "Cart",
-        link: APP_ROUTES.CART.PATH,
+        link: APP_ROUTES.CART,
         tooltip: "Cart",
         icon: {
           name: "mdi-cart",

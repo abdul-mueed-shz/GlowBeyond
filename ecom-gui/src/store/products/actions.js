@@ -35,9 +35,9 @@ export async function fetchCategories({ state, commit }) {
     const url = "categories/";
     const categories = await api.get(url);
     commit("setCategories", categories.data);
-    return Promise.resolve();
+    return categories.data;
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 export async function getCategoryDetails({ state, commit }, queryParams) {

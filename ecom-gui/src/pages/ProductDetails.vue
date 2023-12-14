@@ -4,7 +4,7 @@
       <div class="col-7">
         <q-img
           class="full-width"
-          style="max-width: 1000px; max-height: 700px"
+          style="max-width: 900px; height: 900px"
           :src="product.get_thumbnail"
         ></q-img>
       </div>

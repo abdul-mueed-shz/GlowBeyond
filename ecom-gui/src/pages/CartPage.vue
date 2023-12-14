@@ -276,18 +276,16 @@ export default {
         return;
       }
       const payload = {
-        //auth_token: loginDetails.value.auth_token,
         data: {
           customer: formData,
-          //user: loginDetails.value.user_information.id,
           products: cartItems.value,
-          // stripe_token: "Ragnarok",
           order: {
             paid_amount: getCartTotal.value,
           },
         },
       };
       await $store.dispatch("cart/checkout", payload);
+      onCheckout.value = false;
       successfulBuyOutDialog();
     }
     function successfulBuyOutDialog() {
@@ -296,16 +294,7 @@ export default {
         componentProps: {
           text: "Purchase successful !",
         },
-      })
-        .onOk(() => {
-          console.log("OK");
-        })
-        .onCancel(() => {
-          console.log("Cancel");
-        })
-        .onDismiss(() => {
-          console.log("Called on OK or Cancel");
-        });
+      });
     }
 
     return {
