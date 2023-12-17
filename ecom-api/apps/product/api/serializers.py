@@ -6,15 +6,15 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'id',
-            'category',
-            'name',
-            'slug',
-            'description',
-            'price',
-            'get_absolute_url',
-            'get_image',
-            'get_thumbnail',
+            "id",
+            "category",
+            "name",
+            "slug",
+            "description",
+            "price",
+            "get_absolute_url",
+            "get_images",
+            "get_thumbnail",
         )
 
 
@@ -24,9 +24,9 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = (
-            'id',
-            'name',
-            'get_absolute_url',
-            'slug',
-            'products',
+            "id",
+            "name",
+            "get_absolute_url",
+            "slug",
+            "products",
         )

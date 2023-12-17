@@ -1,12 +1,9 @@
 <template>
-  <q-card
-    flat
-    class="col-12 col-sm-6 col-md-3 full-height border-radius__12px cursor-pointer"
-  >
+  <q-card flat class="col-12 col-sm-6 col-md-3 full-height border-radius__12px">
     <q-card-section>
       <q-img
         @click="goToDetails"
-        class="image-area border-radius-top__6px min-height__430px"
+        class="image-area border-radius-top__6px min-height__430px cursor-pointer"
         :src="product.get_thumbnail"
       ></q-img>
     </q-card-section>
@@ -58,7 +55,6 @@ const categories = computed(() => {
 });
 
 const $store = useStore();
-const $router = useRouter();
 
 const MAP = computed(() => {
   return $store.getters["app/getMAP"];

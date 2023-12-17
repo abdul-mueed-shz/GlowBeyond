@@ -1,6 +1,6 @@
 <template>
-  <div class="text-weight-medium text-secondary text-h4 text-center q-pt-xl">
-    {{ MAP.HOMEPAGE.HOLIDAY_GIFT_GUIDE }}
+  <div class="text-secondary text-h4 text-center q-pt-xl">
+    {{ MAP.HOMEPAGE.LATESTPRODUCTS }}
   </div>
   <div
     class="row q-pt-lg q-gutter-y-md text-center text-grey-9"

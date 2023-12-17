@@ -2,14 +2,14 @@
   <div class="row">
     <q-card
       flat
-      class="col-xs-12 col-sm-5 col-md-3 cursor-pointer"
+      class="col-xs-12 col-sm-5 col-md-3"
       id="products"
       v-for="product in products"
       :key="product.id"
     >
       <q-card-section>
         <q-img
-          class="border-radius-top__6px height__400px"
+          class="border-radius-top__6px height__400px cursor-pointer"
           :src="product.get_thumbnail"
           @click="() => toProductcategoryDetails(product)"
         ></q-img>

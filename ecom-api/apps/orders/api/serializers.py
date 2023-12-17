@@ -16,16 +16,14 @@ class OrderSerializer(serializers.ModelSerializer):
         queryset=Customer.objects.all(), many=False
     )
     payment_method = serializers.PrimaryKeyRelatedField(
-        required=False,
+        required=True,
         queryset=PaymentMethod.objects.all(),
         many=False,
-        default=PaymentMethod.objects.get(name="COD"),
     )
     delivery_status = serializers.PrimaryKeyRelatedField(
-        required=False,
+        required=True,
         queryset=DeliveryStatus.objects.all(),
         many=False,
-        default=DeliveryStatus.objects.get(name="PENDING"),
     )
 
     class Meta:

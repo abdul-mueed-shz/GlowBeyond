@@ -146,6 +146,7 @@ MEDIA_ROOT = BASE_DIR / "media/"
 STRIPE_SECRET_KEY = "ragnarok"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # AUTH_USER_MODEL = 'user.User'
+APP_URL = env.str("APP_URL", None)
 
 
 # To include the SMTP in backend

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category
+from .models import Attachment, Product, Category
 
 
 # Register your models here.
@@ -11,7 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
         "slug",
         "description",
         "price",
-        "image",
+        # "image",
         "thumbnail",
     ]
 
@@ -22,3 +22,6 @@ class CategoryAdmin(admin.ModelAdmin):
         "name",
         "slug",
     ]
+
+
+admin.site.register(Attachment)

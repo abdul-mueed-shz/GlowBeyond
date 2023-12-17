@@ -91,6 +91,71 @@
       <q-ajax-bar ref="bar" position="bottom" color="accent" size="10px" />
       <router-view :key="$route.fullPath" />
     </q-page-container>
+
+    <q-footer>
+      <div
+        class="q-pt-md q-pb-lg row"
+        style="padding-left: 10%; padding-right: 10%"
+      >
+        <div class="col">
+          <div class="text-h6 q-pb-md">Contact Us</div>
+          <div class="column text-body1 q-gutter-y-sm">
+            <div class="cursor-pointer underline">Contact us</div>
+            <div class="cursor-pointer">We are hiring</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="text-h6 q-pb-md">Help</div>
+          <div class="column text-body1 q-gutter-y-sm">
+            <div class="cursor-pointer">How to order</div>
+            <div class="cursor-pointer">How to use gift card</div>
+            <div class="cursor-pointer">Returns & Exchanges</div>
+            <div class="cursor-pointer">Shipping Details</div>
+            <div class="cursor-pointer">Privacy Policy</div>
+            <div class="cursor-pointer">FAQs</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="text-h6 q-pb-md">What's New</div>
+          <div class="column text-body1 q-gutter-y-sm">
+            <div class="cursor-pointer">Become a Brand Ambassador</div>
+            <div class="cursor-pointer">Who made your chlothes</div>
+            <div class="cursor-pointer">Shop Instagram</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="text-h6 q-pb-md">Mailing Address</div>
+          <div class="column text-body1 q-gutter-y-sm">
+            <div>elo 11 KM Satiana Road Faisalabad Pakistan</div>
+            <div>042-3256-0356</div>
+            <div>(09:00 AM to 6:00 PM Monday - Saturday)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-secondary flex flex-center q-pa-sm">
+        <q-icon
+          name="mdi-facebook"
+          class="cursor-pointer q-px-sm"
+          size="sm"
+        ></q-icon>
+        <q-icon
+          name="mdi-instagram"
+          class="cursor-pointer q-px-sm"
+          size="sm"
+        ></q-icon>
+        <q-icon
+          name="mdi-youtube"
+          class="cursor-pointer q-px-sm"
+          size="sm"
+        ></q-icon>
+        <q-icon
+          name="mdi-twitter"
+          class="cursor-pointer q-px-sm"
+          size="sm"
+        ></q-icon>
+      </div>
+    </q-footer>
   </q-layout>
 </template>
 

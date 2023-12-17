@@ -4,7 +4,8 @@ from rest_framework.exceptions import AuthenticationFailed, ValidationError, Not
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from apps.commons.utils.auth import JwtAuthentication
-from apps.orders.models import Order, OrderItems
+from apps.orders.models import DeliveryStatus, Order, OrderItems
+from apps.payment.models import PaymentMethod
 from apps.product.api.serializers import ProductSerializer
 from apps.product.models import Product
 
@@ -17,6 +18,28 @@ from django.db import transaction
 
 
 class CheckoutView(GenericAPIView):
+    DEFAULT_DELIVERY_STATUS = DeliveryStatus.objects.filter(name="PENDING")
+    DEFAULT_PAYMENT_METHOD = PaymentMethod.objects.filter(name="COD")
+
+    def check_order_and_add_defaults(self, order_data):
+        if (
+            not order_data.get("payment_method")
+            and self.DEFAULT_PAYMENT_METHOD.exists()
+        ):
+            order_data.update(
+                {"payment_method": self.DEFAULT_PAYMENT_METHOD.first().id}
+            )
+
+        if (
+            not order_data.get("delivery_status")
+            and self.DEFAULT_DELIVERY_STATUS.exists()
+        ):
+            order_data.update(
+                {"delivery_status": self.DEFAULT_DELIVERY_STATUS.first().id}
+            )
+
+        return order_data
+
     @transaction.atomic
     def post(self, request):
         request_data = request.data.copy()
@@ -30,6 +53,8 @@ class CheckoutView(GenericAPIView):
         customer_serializer = CustomerSerializer(data=customer_data)
         customer_serializer.is_valid(raise_exception=True)
         customer_instance = customer_serializer.save()
+
+        self.check_order_and_add_defaults(order_data=order_data)
 
         order_data = {"customer": customer_instance.id, **order_data}
         order_serializer = OrderSerializer(data=order_data)
