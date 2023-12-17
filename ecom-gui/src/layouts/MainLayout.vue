@@ -31,7 +31,7 @@
           <q-img
             class="cursor-pointer"
             @click="() => $router.push(APP_ROUTES.HOME.PATH)"
-            src="../assets/LOGO.png"
+            :src="getAppInfo.logo ?? '../assets/LOGO.png'"
             width="200px"
           ></q-img>
         </div>
@@ -70,7 +70,7 @@
             >
           </template>
         </q-input>
-        <AuthMenu />
+        <AuthMenu v-if="false" />
       </q-toolbar>
     </q-header>
     <q-drawer
@@ -94,17 +94,17 @@
 
     <q-footer>
       <div
-        class="q-pt-md q-pb-lg row"
+        class="q-pt-md q-pb-lg row q-gutter-y-md"
         style="padding-left: 10%; padding-right: 10%"
       >
-        <div class="col">
+        <div class="col-12 col-sm-3">
           <div class="text-h6 q-pb-md">Contact Us</div>
           <div class="column text-body1 q-gutter-y-sm">
-            <div class="cursor-pointer underline">Contact us</div>
-            <div class="cursor-pointer">We are hiring</div>
+            <div class="cursor-pointer underline">contact@ogs.org</div>
+            <div class="cursor-pointer">+923234942960</div>
           </div>
         </div>
-        <div class="col">
+        <div class="col-12 col-sm-3">
           <div class="text-h6 q-pb-md">Help</div>
           <div class="column text-body1 q-gutter-y-sm">
             <div class="cursor-pointer">How to order</div>
@@ -115,7 +115,7 @@
             <div class="cursor-pointer">FAQs</div>
           </div>
         </div>
-        <div class="col">
+        <div class="col-12 col-sm-3">
           <div class="text-h6 q-pb-md">What's New</div>
           <div class="column text-body1 q-gutter-y-sm">
             <div class="cursor-pointer">Become a Brand Ambassador</div>
@@ -123,7 +123,7 @@
             <div class="cursor-pointer">Shop Instagram</div>
           </div>
         </div>
-        <div class="col">
+        <div class="col-12 col-sm-3">
           <div class="text-h6 q-pb-md">Mailing Address</div>
           <div class="column text-body1 q-gutter-y-sm">
             <div>elo 11 KM Satiana Road Faisalabad Pakistan</div>
@@ -135,24 +135,12 @@
 
       <div class="bg-secondary flex flex-center q-pa-sm">
         <q-icon
-          name="mdi-facebook"
+          v-for="icon in getSocials"
+          :key="icon.mdi_icon"
+          :name="icon.mdi_icon"
           class="cursor-pointer q-px-sm"
           size="sm"
-        ></q-icon>
-        <q-icon
-          name="mdi-instagram"
-          class="cursor-pointer q-px-sm"
-          size="sm"
-        ></q-icon>
-        <q-icon
-          name="mdi-youtube"
-          class="cursor-pointer q-px-sm"
-          size="sm"
-        ></q-icon>
-        <q-icon
-          name="mdi-twitter"
-          class="cursor-pointer q-px-sm"
-          size="sm"
+          @click="() => openSocial(icon)"
         ></q-icon>
       </div>
     </q-footer>
@@ -188,6 +176,14 @@ export default {
     const leftDrawerOpen = ref(false);
 
     // COMPUTED PROPERTIES
+
+    const getSocials = computed(() => {
+      return store.getters["appinfo/getSocials"];
+    });
+
+    const getAppInfo = computed(() => {
+      return store.getters["appinfo/getAppInfo"];
+    });
 
     const MAP = computed(() => {
       return store.getters["app/getMAP"];
@@ -249,11 +245,25 @@ export default {
       }, 60000);
       store.dispatch("login/setIntervalId", intervalId);
     }
+
+    async function setSocials() {
+      store.dispatch("appinfo/setSocials");
+    }
+
+    async function setAppInfo() {
+      store.dispatch("appinfo/setAppInfo");
+    }
+
+    function openSocial(icon) {
+      window.open(icon.url);
+    }
+
     onMounted(async () => {
+      setSocials();
+      setAppInfo();
       // headers: {
       //   AUTHTOKEN: loginDetails.value.auth_token, //the token is a variable which holds the token
       // }
-      store.dispatch("menu/setSelectedMenuItem", route.name);
       if (loginDetails.value) {
         setTokenWatcher();
         return;
@@ -282,8 +292,11 @@ export default {
       miniState,
       menuList,
       APP_ROUTES,
-      toggleLeftDrawer,
       search,
+      getSocials,
+      getAppInfo,
+      toggleLeftDrawer,
+      openSocial,
       searchProducts,
     };
   },
