@@ -9,6 +9,7 @@
           thumbnails
           infinite
           style="height: 660px"
+          autoplay
         >
           <q-carousel-slide
             v-for="(image, index) in product.get_images"
