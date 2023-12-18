@@ -87,3 +87,6 @@ class Attachment(BaseModel):
     class Meta:
         verbose_name = "Attachment"
         verbose_name_plural = "Attachments"
+
+    def __str__(self) -> str:
+        return f"{self.product.name}_{self.file_type.lower()}"
