@@ -7,3 +7,4 @@
 *.deb
 ecom-api/.vscode/launch.json
 ecom-api/.env
+ecom-api.code-workspace
