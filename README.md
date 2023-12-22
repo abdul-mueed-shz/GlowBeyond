@@ -40,14 +40,14 @@
 <h2><img  width="30px" src="https://www.animatedimages.org/data/media/491/animated-television-image-0115.gif" border="0" alt="animated-television-image-0115" />
   Screenshots</h2>
 
-![Home](https://user-images.githubusercontent.com/52679916/207143514-df94da04-a394-4960-9990-a49942889cd8.png)
-![summer](https://user-images.githubusercontent.com/52679916/207143677-15f60563-80b4-480d-a094-586697e2730c.png)
-![Winter](https://user-images.githubusercontent.com/52679916/207143688-48a67dfb-a47f-43b4-b4af-242fd84a20d5.png)
-![ProductDetails](https://user-images.githubusercontent.com/52679916/207143624-13513a4a-2717-45c3-810a-7bfb6578c4d8.png)
-![AccountDetails](https://user-images.githubusercontent.com/52679916/207143392-8cf216ac-c119-41b1-9de0-f33f2db901c1.png)
-![Notifications](https://user-images.githubusercontent.com/52679916/207143556-7504b5c2-5e44-4869-8138-ea71f3af62b2.png)
-![ErrorHandling](https://user-images.githubusercontent.com/52679916/207143501-12f5deb1-81c0-4fbb-aa26-6baf37fb8ddb.png)
-![loginWithAuthApplication](https://user-images.githubusercontent.com/52679916/207143548-6a925a9f-e4a6-4082-ba18-09d1a3e98fbc.png)
+
+![home](https://github.com/Abdul-Mueed-Shahbaz/Eccomerce-Application/assets/52679916/053b6fef-5bc7-4265-b40b-64692c669863)
+![home2](https://github.com/Abdul-Mueed-Shahbaz/Eccomerce-Application/assets/52679916/e8b5214d-046d-4d40-a10a-540aed073210)
+![summer](https://github.com/Abdul-Mueed-Shahbaz/Eccomerce-Application/assets/52679916/74228fea-72ab-49ac-889c-7f0220d6c4a8)
+![winter](https://github.com/Abdul-Mueed-Shahbaz/Eccomerce-Application/assets/52679916/1faeb934-24ad-4a08-83f4-ccae3a0ffd65)
+![proddetails](https://github.com/Abdul-Mueed-Shahbaz/Eccomerce-Application/assets/52679916/9bb3277c-b1b4-48c2-ac7d-dd25d0f31873)
+![cart](https://github.com/Abdul-Mueed-Shahbaz/Eccomerce-Application/assets/52679916/f77a13fe-fc09-4900-b01d-406c1832ca83)
+hAuthApplication](https://user-images.githubusercontent.com/52679916/207143548-6a925a9f-e4a6-4082-ba18-09d1a3e98fbc.png)
 ![Cart](https://user-images.githubusercontent.com/52679916/207143476-2587bc15-ccf9-40b7-be99-d04647310322.png)
 ![Checkout](https://user-images.githubusercontent.com/52679916/207143485-048a50e6-ddf4-48d7-b57c-c49ff39ea3a5.png)
 

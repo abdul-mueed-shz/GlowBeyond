@@ -8,3 +8,4 @@
 ecom-api/.vscode/launch.json
 ecom-api/.env
 ecom-api.code-workspace
+ecom-api/apps/commons/__pycache__/__init__.cpython-311.pyc
