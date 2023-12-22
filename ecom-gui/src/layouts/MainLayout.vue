@@ -92,19 +92,24 @@
       <router-view :key="$route.fullPath" />
     </q-page-container>
 
-    <q-footer>
+    <q-footer class="q-pt-md">
       <div
-        class="q-pt-md q-pb-lg row q-gutter-y-md"
+        class="q-pt-md q-pb-lg row q-gutter-y-md justify-center"
         style="padding-left: 10%; padding-right: 10%"
       >
         <div class="col-12 col-sm-3">
           <div class="text-h6 q-pb-md">Contact Us</div>
           <div class="column text-body1 q-gutter-y-sm">
-            <div class="cursor-pointer underline">contact@ogs.org</div>
-            <div class="cursor-pointer">+923234942960</div>
+            <div
+              v-for="contact in getContactInfo"
+              :key="contact.id"
+              class="cursor-pointer underline"
+            >
+              {{ contact.info }}
+            </div>
           </div>
         </div>
-        <div class="col-12 col-sm-3">
+        <!-- <div class="col-12 col-sm-3">
           <div class="text-h6 q-pb-md">Help</div>
           <div class="column text-body1 q-gutter-y-sm">
             <div class="cursor-pointer">How to order</div>
@@ -122,18 +127,22 @@
             <div class="cursor-pointer">Who made your chlothes</div>
             <div class="cursor-pointer">Shop Instagram</div>
           </div>
-        </div>
+        </div> -->
         <div class="col-12 col-sm-3">
           <div class="text-h6 q-pb-md">Mailing Address</div>
           <div class="column text-body1 q-gutter-y-sm">
-            <div>elo 11 KM Satiana Road Faisalabad Pakistan</div>
-            <div>042-3256-0356</div>
-            <div>(09:00 AM to 6:00 PM Monday - Saturday)</div>
+            <div
+              v-for="mailing in getMailingInfo"
+              :key="mailing.id"
+              class="cursor-pointer underline"
+            >
+              {{ mailing.info }}
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="bg-secondary flex flex-center q-pa-sm">
+      <div class="q-mt-md q-pb-md bg-secondary flex flex-center q-pa-sm">
         <q-icon
           v-for="icon in getSocials"
           :key="icon.mdi_icon"
@@ -183,6 +192,14 @@ export default {
 
     const getAppInfo = computed(() => {
       return store.getters["appinfo/getAppInfo"];
+    });
+
+    const getMailingInfo = computed(() => {
+      return store.getters["appinfo/getMailingInfo"];
+    });
+
+    const getContactInfo = computed(() => {
+      return store.getters["appinfo/getContactInfo"];
     });
 
     const MAP = computed(() => {
@@ -254,6 +271,14 @@ export default {
       store.dispatch("appinfo/setAppInfo");
     }
 
+    async function setMailingInfo() {
+      store.dispatch("appinfo/setMailingInfo");
+    }
+
+    async function setContactInfo() {
+      store.dispatch("appinfo/setContactInfo");
+    }
+
     function openSocial(icon) {
       window.open(icon.url);
     }
@@ -261,6 +286,8 @@ export default {
     onMounted(async () => {
       setSocials();
       setAppInfo();
+      setMailingInfo();
+      setContactInfo();
       // headers: {
       //   AUTHTOKEN: loginDetails.value.auth_token, //the token is a variable which holds the token
       // }
@@ -295,6 +322,8 @@ export default {
       search,
       getSocials,
       getAppInfo,
+      getContactInfo,
+      getMailingInfo,
       toggleLeftDrawer,
       openSocial,
       searchProducts,

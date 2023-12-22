@@ -21,3 +21,23 @@ export async function setAppInfo({ commit }) {
     throw new Error(err);
   }
 }
+
+export async function setMailingInfo({ commit }) {
+  try {
+    const res = await api.get("mailing-info");
+    commit("setMailingInfo", res.data);
+    return res.data;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+export async function setContactInfo({ commit }) {
+  try {
+    const res = await api.get("contact-info");
+    commit("setContactInfo", res.data);
+    return res.data;
+  } catch (err) {
+    throw new Error(err);
+  }
+}

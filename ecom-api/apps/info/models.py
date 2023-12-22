@@ -39,3 +39,27 @@ class App(BaseModel):
 
     def __str__(self) -> str:
         return self.name
+
+
+class MailingInformation(BaseModel):
+    info = models.CharField(max_length=1000)
+
+    class Meta:
+        db_table = "mailing_information"
+        verbose_name = "Mailing Information"
+        verbose_name_plural = "Mailing Informations"
+
+    def __str__(self) -> str:
+        return self.info
+
+
+class ContactInformation(BaseModel):
+    info = models.CharField(max_length=1000)
+
+    class Meta:
+        db_table = "contact_information"
+        verbose_name = "Contact Information"
+        verbose_name_plural = "Contact Informations"
+
+    def __str__(self) -> str:
+        return self.info

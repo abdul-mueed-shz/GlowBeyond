@@ -3,13 +3,24 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from apps.info.api.views import AppInfoView, SocialsView
+from apps.info.api.views import (
+    AppInfoView,
+    ContactInfoViewSet,
+    MailingInfoViewSet,
+    SocialsView,
+)
 
 api_prefix = "api/v1/"
 
 router = DefaultRouter()
 router.register(api_prefix + "socials", SocialsView, basename="socials")
 router.register(api_prefix + "app-info", AppInfoView, basename="app_info")
+router.register(
+    api_prefix + "mailing-info", MailingInfoViewSet, basename="mailing_info"
+)
+router.register(
+    api_prefix + "contact-info", ContactInfoViewSet, basename="contact_info"
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

@@ -1,5 +1,10 @@
-from apps.info.api.serializers import AppSerializer, SocialSerializer
-from apps.info.models import App, Social
+from apps.info.api.serializers import (
+    AppSerializer,
+    ContactInformationSerializer,
+    MailingInformationSerializer,
+    SocialSerializer,
+)
+from apps.info.models import App, ContactInformation, MailingInformation, Social
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 
@@ -16,3 +21,17 @@ class AppInfoView(ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return App.objects.all()
+
+
+class MailingInfoViewSet(ReadOnlyModelViewSet):
+    serializer_class = MailingInformationSerializer
+
+    def get_queryset(self):
+        return MailingInformation.objects.all()
+
+
+class ContactInfoViewSet(ReadOnlyModelViewSet):
+    serializer_class = ContactInformationSerializer
+
+    def get_queryset(self):
+        return ContactInformation.objects.all()
