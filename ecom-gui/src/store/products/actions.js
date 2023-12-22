@@ -17,15 +17,14 @@ export async function getProductDetails({ state, commit }, queryParams) {
   if (queryParams.category_slug && queryParams.product_slug) {
     try {
       const url = "products/product_details/";
-      const product_detail = await api.get(url, {
+      const res = await api.get(url, {
         params: queryParams,
       });
-      commit("setSelectedProduct", product_detail.data);
-      return Promise.resolve();
+      commit("setSelectedProduct", res.data);
+      return res.data;
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
-    return;
   }
   return "INVALID PARAMS";
 }
@@ -35,9 +34,9 @@ export async function fetchCategories({ state, commit }) {
     const url = "categories/";
     const categories = await api.get(url);
     commit("setCategories", categories.data);
-    return Promise.resolve();
+    return categories.data;
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 export async function getCategoryDetails({ state, commit }, queryParams) {

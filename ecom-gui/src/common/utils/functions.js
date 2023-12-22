@@ -17,10 +17,13 @@ export function getCategoryDetails(category_slug) {
 export async function toProductDetails(product_slug, category_slug) {
   // Takes in the product and category slug to pass as a query parameter for the api call
   // On success routes to the productDetails page
+  $router.push({
+    name: APP_ROUTES.PRODUCT_DETAILS.NAME,
+    query: { category: category_slug, product: product_slug },
+  });
   try {
-    const queryParams = { category_slug, product_slug };
-    await $store.dispatch("products/getProductDetails", queryParams);
-    $router.push({ name: APP_ROUTES.PRODUCT_DETAILS.NAME });
+    // const queryParams = { category_slug, product_slug };
+    // await $store.dispatch("products/getProductDetails", queryParams);
   } catch (error) {
     console.log(error);
   }

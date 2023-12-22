@@ -1,5 +1,11 @@
 <template>
-  <q-table :rows="rows" :columns="columns">
+  <q-table
+    class="border-radius__12px q-pt-md text-grey-8"
+    flat
+    bordered
+    :rows="rows"
+    :columns="columns"
+  >
     <!--  -->
     <template #header="props">
       <q-tr :props="props">

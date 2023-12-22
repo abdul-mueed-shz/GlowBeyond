@@ -1,8 +1,15 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS += ["http://127.0.0.1"]
+
+
+ALLOWED_HOSTS = ["http://127.0.0.1"]
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
+
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ["AUTHTOKEN", "content-type"]

@@ -4,9 +4,20 @@
 <!-- TODO: MAKE UTIL FUNCTIONS FOR CART ITEM DECREMENT INCREMENT AND REMOVAL IN CART ITEMS COMPONENT -->
 
 <template>
-  <q-layout view="hHh Lpr lFf">
-    <q-header :elevated="$route.name != APP_ROUTES.HOME.NAME">
-      <q-toolbar>
+  <q-layout view="lHh LpR lff">
+    <q-header>
+      <div class="bg-notif-message q-py-sm flex flex-center text-weight-medium">
+        <span>Free shipping above order 300 Dhs</span>
+        <span>
+          <q-icon
+            name="mdi-arrow-right"
+            flat
+            class="cursor-pointer q-px-xs"
+            size="sm"
+          ></q-icon>
+        </span>
+      </div>
+      <q-toolbar class="bg-white text-secondary q-px-xl">
         <q-btn
           flat
           dense
@@ -15,45 +26,124 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-        <q-toolbar-title>
-          {{ MAP.APPNAME }}
-        </q-toolbar-title>
+        <q-space></q-space>
+        <div>
+          <q-img
+            class="cursor-pointer"
+            @click="() => $router.push(APP_ROUTES.HOME.PATH)"
+            :src="getAppInfo.logo ?? '../assets/LOGO.png'"
+            width="200px"
+          ></q-img>
+        </div>
+        <q-space></q-space>
+        <q-btn
+          v-if="!toggleSearch"
+          flat
+          @click="() => (toggleSearch = !toggleSearch)"
+          icon="mdi-magnify"
+          round
+        ></q-btn>
         <q-input
-          class="bg-white rounded-borders q-my-sm"
+          v-else
+          class="bg-white rounded-borders"
           dense
-          filled
-          label="Search"
+          :placeholder="!search && 'Search'"
           v-model="search"
           @update:model-value="searchProducts"
-          debounce="500"
+          debounce="1000"
+          clearable
         >
+          <template #prepend>
+            <q-icon
+              class="cursor-pointer"
+              @click="searchProducts"
+              name="mdi-magnify"
+            ></q-icon>
+          </template>
           <template #append>
-            <q-btn flat @click="searchProducts" icon="mdi-magnify"></q-btn>
+            <q-icon
+              class="cursor-pointer"
+              @click="() => (toggleSearch = !toggleSearch)"
+              name="mdi-close"
+            >
+              <q-tooltip> Close search </q-tooltip></q-icon
+            >
           </template>
         </q-input>
-        <AuthMenu />
+        <AuthMenu v-if="false" />
       </q-toolbar>
     </q-header>
     <q-drawer
       v-model="leftDrawerOpen"
-      :mini="miniState"
-      :breakpoint="10"
       :width="250"
-      show-if-above
       :bordered="$route.name != APP_ROUTES.HOME.NAME"
-      class="bg-primary text-white"
     >
-      <main-menu
-        v-for="item in menuList"
-        :key="item.name"
-        :item="item"
-        :mini-state="miniState"
-      />
+      <div class="q-pt-md">
+        <main-menu
+          v-for="item in menuList"
+          :key="item.name"
+          :item="item"
+          :mini-state="miniState"
+        />
+      </div>
     </q-drawer>
     <q-page-container>
       <q-ajax-bar ref="bar" position="bottom" color="accent" size="10px" />
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </q-page-container>
+
+    <q-footer>
+      <div
+        class="q-pt-md q-pb-lg row q-gutter-y-md"
+        style="padding-left: 10%; padding-right: 10%"
+      >
+        <div class="col-12 col-sm-3">
+          <div class="text-h6 q-pb-md">Contact Us</div>
+          <div class="column text-body1 q-gutter-y-sm">
+            <div class="cursor-pointer underline">contact@ogs.org</div>
+            <div class="cursor-pointer">+923234942960</div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3">
+          <div class="text-h6 q-pb-md">Help</div>
+          <div class="column text-body1 q-gutter-y-sm">
+            <div class="cursor-pointer">How to order</div>
+            <div class="cursor-pointer">How to use gift card</div>
+            <div class="cursor-pointer">Returns & Exchanges</div>
+            <div class="cursor-pointer">Shipping Details</div>
+            <div class="cursor-pointer">Privacy Policy</div>
+            <div class="cursor-pointer">FAQs</div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3">
+          <div class="text-h6 q-pb-md">What's New</div>
+          <div class="column text-body1 q-gutter-y-sm">
+            <div class="cursor-pointer">Become a Brand Ambassador</div>
+            <div class="cursor-pointer">Who made your chlothes</div>
+            <div class="cursor-pointer">Shop Instagram</div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3">
+          <div class="text-h6 q-pb-md">Mailing Address</div>
+          <div class="column text-body1 q-gutter-y-sm">
+            <div>elo 11 KM Satiana Road Faisalabad Pakistan</div>
+            <div>042-3256-0356</div>
+            <div>(09:00 AM to 6:00 PM Monday - Saturday)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-secondary flex flex-center q-pa-sm">
+        <q-icon
+          v-for="icon in getSocials"
+          :key="icon.mdi_icon"
+          :name="icon.mdi_icon"
+          class="cursor-pointer q-px-sm"
+          size="sm"
+          @click="() => openSocial(icon)"
+        ></q-icon>
+      </div>
+    </q-footer>
   </q-layout>
 </template>
 
@@ -63,7 +153,7 @@ import AuthMenu from "src/components/AuthenticationMenu.vue";
 import { APP_ROUTES } from "../common/constants/_routes";
 import { computed, getCurrentInstance, onMounted, ref } from "vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   components: {
@@ -72,47 +162,62 @@ export default {
   },
   setup() {
     // CONSTANTS
+    const toggleSearch = ref(false);
     const app = getCurrentInstance();
 
     const search = ref("");
 
-    const $store = useStore();
+    const store = useStore();
 
-    const $router = useRouter();
+    const router = useRouter();
+
+    const route = useRoute();
 
     const leftDrawerOpen = ref(false);
 
     // COMPUTED PROPERTIES
 
+    const getSocials = computed(() => {
+      return store.getters["appinfo/getSocials"];
+    });
+
+    const getAppInfo = computed(() => {
+      return store.getters["appinfo/getAppInfo"];
+    });
+
     const MAP = computed(() => {
-      return $store.getters["app/getMAP"];
+      return store.getters["app/getMAP"];
     });
 
     const selectedMenuItem = computed(() => {
-      return $store.getters["menu/getSelectedMenuItem"];
+      return store.getters["menu/getSelectedMenuItem"];
     });
 
     const miniState = computed(() => {
-      return $store.getters["app/getMiniState"];
+      return store.getters["app/getMiniState"];
     });
 
     const menuList = computed(() => {
-      return $store.getters["menu/getMenuList"];
+      return store.getters["menu/getMenuList"];
     });
 
     const loginDetails = computed(() => {
-      return $store.getters["login/getLoginDetails"];
+      return store.getters["login/getLoginDetails"];
     });
 
     // FUNCTIONS
     function toggleLeftDrawer() {
-      $store.commit("app/toggleMiniState");
+      leftDrawerOpen.value = !leftDrawerOpen.value;
     }
 
     function searchProducts(query) {
-      $store.dispatch("products/search", { query }).then((res) => {
+      if (!query) {
+        router.push({ name: APP_ROUTES.HOME.NAME });
+        return;
+      }
+      store.dispatch("products/search", { query }).then((res) => {
         if (res.length > 0) {
-          $router.push(APP_ROUTES.SEARCH_RESULTS.NAME);
+          router.push({ name: APP_ROUTES.SEARCH_RESULTS.NAME });
         }
       });
     }
@@ -126,21 +231,36 @@ export default {
     }
     function setTokenWatcher() {
       if (!isTokenValid()) {
-        $store.dispatch("login/setLoginDetails", null);
+        store.dispatch("login/setLoginDetails", null);
         clearInterval(intervalId);
-        $store.dispatch("login/setIntervalId", null);
+        store.dispatch("login/setIntervalId", null);
         return;
       }
       const intervalId = setInterval(() => {
         if (!isTokenValid()) {
-          $store.dispatch("login/setLoginDetails", null);
+          store.dispatch("login/setLoginDetails", null);
           clearInterval(intervalId);
-          $store.dispatch("login/setIntervalId", null);
+          store.dispatch("login/setIntervalId", null);
         }
       }, 60000);
-      $store.dispatch("login/setIntervalId", intervalId);
+      store.dispatch("login/setIntervalId", intervalId);
     }
+
+    async function setSocials() {
+      store.dispatch("appinfo/setSocials");
+    }
+
+    async function setAppInfo() {
+      store.dispatch("appinfo/setAppInfo");
+    }
+
+    function openSocial(icon) {
+      window.open(icon.url);
+    }
+
     onMounted(async () => {
+      setSocials();
+      setAppInfo();
       // headers: {
       //   AUTHTOKEN: loginDetails.value.auth_token, //the token is a variable which holds the token
       // }
@@ -157,7 +277,7 @@ export default {
           new URLSearchParams(querySearch)
         );
         if (queryObject.auth_token) {
-          await $store.dispatch("login/getAuthDetails", queryObject);
+          await store.dispatch("login/getAuthDetails", queryObject);
           setTokenWatcher();
           window.history.replaceState({}, "home", window.location.origin);
         }
@@ -165,14 +285,18 @@ export default {
     });
 
     return {
+      toggleSearch,
       leftDrawerOpen,
       MAP,
       selectedMenuItem,
       miniState,
       menuList,
       APP_ROUTES,
-      toggleLeftDrawer,
       search,
+      getSocials,
+      getAppInfo,
+      toggleLeftDrawer,
+      openSocial,
       searchProducts,
     };
   },

@@ -1,7 +1,7 @@
 export default function () {
   return {
     MAP: {
-      APPNAME: "Starks",
+      APPNAME: "Maria's Skin Care",
       LOGIN: "Log In",
       CountryName: "Pakistan",
       CART_PAGE: {
@@ -13,11 +13,13 @@ export default function () {
       },
       HOMEPAGE: {
         GREETINGS: {
-          HEADING: "Welcome to The Starks",
-          BODY: "The best clothing store in Pakistan!",
+          HEADING: "Welcome to The Maria's Skin Care",
+          BODY: "The best skincare store in Pakistan!",
         },
         LATESTPRODUCTS: "Latest Products",
+        HOLIDAY_GIFT_GUIDE: "Holiday gift guide",
         VIEWDETAILS: "View details",
+        ADD_TO_BAG: "Add to bag",
       },
       Link: {
         Routes: {
@@ -29,6 +31,7 @@ export default function () {
           product_details: "Details",
           search_results: "Search",
           account_details: "Account",
+          category: "Category",
         },
       },
       INPUTS_LABELS: {

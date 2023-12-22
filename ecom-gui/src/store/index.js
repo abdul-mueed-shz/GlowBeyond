@@ -7,6 +7,7 @@ import app from "./app";
 import products from "./products";
 import cart from "./cart";
 import login from "./login";
+import appinfo from "./appinfo";
 
 const ls = new SecureLS({ isCompression: false });
 const persistedState = createPersistedState({
@@ -26,6 +27,7 @@ export default store(function () {
       app,
       products,
       cart,
+      appinfo,
     },
 
     plugins: [persistedState],

@@ -1,11 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from apps.commons.models import BaseModel
 
-from django.contrib.auth.models import \
-    User  # Using default user model for now. Later replace the auth token user foreignkey with the custom one
+from django.contrib.auth.models import (
+    User,
+)  # Using default user model for now. Later replace the auth token user foreignkey with the custom one
 
 
 class AuthToken(models.Model):
@@ -13,6 +12,7 @@ class AuthToken(models.Model):
     token = models.CharField(max_length=500)
     expiry = models.DecimalField(max_digits=50, decimal_places=2)
     created_on = models.DateTimeField(auto_now_add=True)
+
 
 # class User(AbstractBaseUser):
 #     first_name = models.CharField(max_length=255)

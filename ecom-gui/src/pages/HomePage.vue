@@ -1,7 +1,10 @@
 <template>
-  <q-page>
-    <BannerItem />
-    <LatestProducts :product-list="productList" />
+  <q-page class="q-pb-md">
+    <banner-item />
+    <latest-products
+      :latest-products="latestProducts"
+      :latest-in-categories="latestInCategories"
+    />
   </q-page>
 </template>
 
@@ -17,13 +20,19 @@ export default {
     LatestProducts,
   },
   setup() {
-    const $store = useStore();
-    const productList = computed(() => {
-      return $store.getters["products/getLatestProducts"];
+    const store = useStore();
+
+    const latestInCategories = computed(() => {
+      return store.getters["products/getCategories"];
+    });
+
+    const latestProducts = computed(() => {
+      return store.getters["products/getLatestProducts"];
     });
 
     return {
-      productList,
+      latestProducts,
+      latestInCategories,
     };
   },
 };

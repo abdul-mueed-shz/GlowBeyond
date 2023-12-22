@@ -1,42 +1,50 @@
 <template>
   <div class="row">
-    <div
-      class="col-xs-12 col-sm-5 col-md-3 col-lg-2"
+    <q-card
+      flat
+      class="col-xs-12 col-sm-5 col-md-3"
       id="products"
       v-for="product in products"
       :key="product.id"
     >
-      <div class="q-px-sm">
-        <q-card
-          class="product-card full-width cursor-pointer full-height text-center"
-          style="max-width: 300px"
-          @click="toProductcategoryDetails(product)"
+      <q-card-section>
+        <q-img
+          class="border-radius-top__6px height__400px cursor-pointer"
+          :src="product.get_thumbnail"
+          @click="() => toProductcategoryDetails(product)"
+        ></q-img>
+      </q-card-section>
+      <q-card-section class="column items-center">
+        <div>
+          {{ product.name }}
+        </div>
+        <div class="q-py-sm">
+          {{ +product.price + " Dhs" }}
+        </div>
+        <div
+          class="text-grey-7 height__40px text-overflow__hidden-ellipsis max-width__420px text-center"
         >
-          <q-card-section>
-            <q-img
-              style="max-width: 300px; max-height: 190px"
-              :src="product.get_thumbnail"
-            ></q-img>
-          </q-card-section>
-          <q-card-section class="product-details">
-            <div class="q-mb-sm text-weight-medium">
-              {{ product.name }}
-            </div>
-            <div class="q-mb-xs overflow-ellipsis cat-description">
-              {{ product.description }}
-            </div>
-            <div class="q-pt-sm text-weight-bolder">
-              {{ "Price: " + +product.price + " Rs" }}
-            </div>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
+          {{ product.description }}
+        </div>
+      </q-card-section>
+      <q-card-actions class="q-py-lg">
+        <div class="full-width">
+          <q-btn
+            @click="addToCart(product, 1)"
+            outline
+            class="full-width"
+            color="secondary"
+            :label="MAP.HOMEPAGE.ADD_TO_BAG"
+          ></q-btn>
+        </div>
+      </q-card-actions>
+    </q-card>
   </div>
 </template>
 
 <script>
-import { toProductDetails } from "src/common/utils/functions";
+import { toProductDetails, addToCart } from "src/common/utils/functions";
+import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "CategoryItems",
@@ -47,8 +55,12 @@ export default {
     },
   },
   setup() {
-    const $store = useStore();
-    const categories = $store.getters["products/getCategories"];
+    const store = useStore();
+    const MAP = computed(() => {
+      return store.getters["app/getMAP"];
+    });
+
+    const categories = store.getters["products/getCategories"];
     function toProductcategoryDetails(product) {
       try {
         const category_slug = categories.find(
@@ -61,6 +73,9 @@ export default {
     }
     return {
       toProductcategoryDetails,
+      MAP,
+      addToCart,
+      toProductDetails,
     };
   },
 };

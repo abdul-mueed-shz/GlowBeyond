@@ -1,31 +1,37 @@
 <template>
-  <div class="col-12 col-sm-6 col-md-4 q-pa-md">
-    <q-card class="full-height product-card">
-      <q-card-section>
-        <q-img class="image-area" :src="product.get_thumbnail"></q-img>
-      </q-card-section>
-      <q-card-section class="column">
-        <div class="text-h4 text-weight-medium q-pb-lg">
-          {{ product.name }}
-        </div>
-        <div class="text-body1 text-weight-medium">
-          <div class="overflow-ellipsis prod-desc">
-            {{ product.description }}
-          </div>
-          <div class="q-pt-md text-weight-bolder">
-            {{ `Price: ${+product.price} Rs` }}
-          </div>
-        </div>
-      </q-card-section>
-      <q-card-actions class="flex flex-center q-pb-lg">
+  <q-card flat class="col-12 col-sm-6 col-md-3 full-height border-radius__12px">
+    <q-card-section>
+      <q-img
+        @click="goToDetails"
+        class="image-area border-radius-top__6px min-height__430px cursor-pointer"
+        :src="product.get_thumbnail"
+      ></q-img>
+    </q-card-section>
+    <q-card-section class="column q-py-none">
+      <div>
+        {{ product.name }}
+      </div>
+      <div class="q-py-md">
+        {{ `${+product.price} Dhs` }}
+      </div>
+      <div
+        class="text-grey-7 height__40px text-overflow__hidden-ellipsis max-width__420px"
+      >
+        {{ product.description }}
+      </div>
+    </q-card-section>
+    <q-card-actions class="q-py-lg">
+      <div class="full-width">
         <q-btn
-          @click="goToDetails"
+          @click="addToCart(product, 1)"
+          outline
+          class="full-width"
           color="secondary"
-          :label="MAP.HOMEPAGE.VIEWDETAILS"
+          :label="MAP.HOMEPAGE.ADD_TO_BAG"
         ></q-btn>
-      </q-card-actions>
-    </q-card>
-  </div>
+      </div>
+    </q-card-actions>
+  </q-card>
 </template>
 
 <script setup>
@@ -33,7 +39,7 @@ import ProductItem from "./ProductItem.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { toProductDetails } from "src/common/utils/functions";
+import { addToCart, toProductDetails } from "src/common/utils/functions";
 
 const props = defineProps({
   product: {
@@ -49,7 +55,6 @@ const categories = computed(() => {
 });
 
 const $store = useStore();
-const $router = useRouter();
 
 const MAP = computed(() => {
   return $store.getters["app/getMAP"];
@@ -69,7 +74,8 @@ function goToDetails() {
 }
 .image-area {
   max-width: 500px;
-  max-height: 300px;
+  max-height: 250px;
+  height: 250px;
 }
 .prod-desc {
   max-height: 140px;
