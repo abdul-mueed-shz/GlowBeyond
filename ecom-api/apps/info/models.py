@@ -85,3 +85,20 @@ class BannerItem(BaseModel):
     def get_image(self):
         if self.image:
             return APP_URL + self.image.url
+
+
+class BannerNotification(BaseModel):
+    statement = models.CharField(max_length=1000)
+
+    class Meta:
+        db_table = "banner-notification"
+        verbose_name = "Banner Notification"
+        verbose_name_plural = "Banner Notifications"
+
+    def __str__(self) -> str:
+        return self.statement
+
+    def save(self, *args, **kwargs):
+        if BannerNotification.objects.filter().exists():
+            return
+        super(BannerNotification, self).save(*args, **kwargs)

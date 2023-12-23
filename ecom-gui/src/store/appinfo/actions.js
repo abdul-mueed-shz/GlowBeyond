@@ -51,3 +51,15 @@ export async function setBannerItems({ commit }) {
     throw new Error(err);
   }
 }
+
+export async function setBannerNotification({ commit }) {
+  try {
+    const res = await api.get("banner-notification");
+    if (res.data.length) {
+      commit("setBannerNotification", res.data[0]);
+    }
+    return res.data;
+  } catch (err) {
+    throw new Error(err);
+  }
+}

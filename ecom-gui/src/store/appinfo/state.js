@@ -5,5 +5,6 @@ export default function () {
     mailingInfo: [],
     contactInfo: [],
     bannerItems: [],
+    bannerNotification: {},
   };
 }

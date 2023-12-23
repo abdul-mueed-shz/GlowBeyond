@@ -7,7 +7,9 @@
   <q-layout view="lHh LpR lff">
     <q-header>
       <div class="bg-notif-message q-py-sm flex flex-center text-weight-medium">
-        <span>Free shipping above order 300 Dhs</span>
+        <span>{{
+          bannerNotification.statement ?? "Free shipping above order 300 Dhs"
+        }}</span>
         <span>
           <q-icon
             name="mdi-arrow-right"
@@ -276,6 +278,10 @@ export default {
       return store.getters["login/getLoginDetails"];
     });
 
+    const bannerNotification = computed(() => {
+      return store.getters["appinfo/getBannerNotification"];
+    });
+
     // FUNCTIONS
     function toggleLeftDrawer() {
       leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -333,6 +339,10 @@ export default {
       store.dispatch("appinfo/setContactInfo");
     }
 
+    async function setBannerNotification() {
+      store.dispatch("appinfo/setBannerNotification");
+    }
+
     function openSocial(icon) {
       window.open(icon.url);
     }
@@ -342,6 +352,7 @@ export default {
       setAppInfo();
       setMailingInfo();
       setContactInfo();
+      setBannerNotification();
       // headers: {
       //   AUTHTOKEN: loginDetails.value.auth_token, //the token is a variable which holds the token
       // }
@@ -380,6 +391,7 @@ export default {
       getMailingInfo,
       cartQuantity,
       cartItems,
+      bannerNotification,
       toggleLeftDrawer,
       openSocial,
       searchProducts,

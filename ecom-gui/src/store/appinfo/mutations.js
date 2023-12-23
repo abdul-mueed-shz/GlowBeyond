@@ -17,3 +17,7 @@ export function setContactInfo(state, contactInfo) {
 export function setBannerItems(state, bannerItems) {
   state.bannerItems = bannerItems;
 }
+
+export function setBannerNotification(state, bannerNotification) {
+  state.bannerNotification = bannerNotification;
+}

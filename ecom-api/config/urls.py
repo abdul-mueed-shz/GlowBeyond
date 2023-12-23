@@ -6,6 +6,7 @@ from rest_framework.routers import DefaultRouter
 from apps.info.api.views import (
     AppInfoView,
     BannerItemViewset,
+    BannerNotificationViewset,
     ContactInfoViewSet,
     MailingInfoViewSet,
     SocialsView,
@@ -23,6 +24,11 @@ router.register(
     api_prefix + "contact-info", ContactInfoViewSet, basename="contact_info"
 )
 router.register(api_prefix + "banner-items", BannerItemViewset, basename="banner_items")
+router.register(
+    api_prefix + "banner-notification",
+    BannerNotificationViewset,
+    basename="banner_notification",
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

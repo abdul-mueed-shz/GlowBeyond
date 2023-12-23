@@ -1,6 +1,7 @@
 from apps.info.api.serializers import (
     AppSerializer,
     BannerItemSerialzer,
+    BannerNotificationSerializer,
     ContactInformationSerializer,
     MailingInformationSerializer,
     SocialSerializer,
@@ -8,6 +9,7 @@ from apps.info.api.serializers import (
 from apps.info.models import (
     App,
     BannerItem,
+    BannerNotification,
     ContactInformation,
     MailingInformation,
     Social,
@@ -49,3 +51,10 @@ class BannerItemViewset(ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return BannerItem.objects.filter(isActive=True, isDeleted=False)
+
+
+class BannerNotificationViewset(ReadOnlyModelViewSet):
+    serializer_class = BannerNotificationSerializer
+
+    def get_queryset(self):
+        return BannerNotification.objects.filter(isActive=True, isDeleted=False)

@@ -17,3 +17,7 @@ export function getContactInfo(state) {
 export function getBannerItems(state) {
   return state.bannerItems;
 }
+
+export function getBannerNotification(state) {
+  return state.bannerNotification;
+}
