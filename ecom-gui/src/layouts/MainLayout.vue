@@ -87,9 +87,58 @@
         />
       </div>
     </q-drawer>
+
     <q-page-container>
-      <q-ajax-bar ref="bar" position="bottom" color="accent" size="10px" />
+      <q-ajax-bar ref="bar" position="bottom" color="primary" size="10px" />
       <router-view :key="$route.fullPath" />
+      <q-page-sticky
+        v-if="$route.name !== APP_ROUTES.CART.NAME"
+        position="bottom-right"
+        :offset="[18, 10]"
+      >
+        <div class="q-px-md q-pb-sm">
+          <div class="relative-position">
+            <div class="q-pb-sm">
+              <q-avatar
+                v-if="+cartQuantity > 0"
+                color="negative"
+                text-color="white"
+                size="sm"
+                class="absolute-top z-max"
+                >{{ cartQuantity }}</q-avatar
+              >
+            </div>
+            <q-fab icon="mdi-cart-outline" direction="up" color="primary">
+              <q-fab-action
+                color="primary"
+                class="q-px-md text-caption"
+                @click="$router.push({ name: APP_ROUTES.CART.NAME })"
+              >
+                <q-icon
+                  name="mdi-cart-outline"
+                  class="q-pr-xs"
+                  size="sm"
+                ></q-icon>
+                Go to Cart
+              </q-fab-action>
+              <!--  -->
+              <q-fab-action
+                :disable="cartQuantity <= 0"
+                color="primary"
+                class="q-px-md text-caption"
+                @click="() => $store.dispatch('cart/clearCart')"
+              >
+                <q-icon
+                  name="mdi-cart-remove"
+                  class="q-pr-xs"
+                  size="sm"
+                ></q-icon>
+                Clear Cart
+              </q-fab-action>
+            </q-fab>
+          </div>
+        </div>
+      </q-page-sticky>
     </q-page-container>
 
     <q-footer class="q-pt-md">
@@ -147,7 +196,7 @@
           v-for="icon in getSocials"
           :key="icon.mdi_icon"
           :name="icon.mdi_icon"
-          class="cursor-pointer q-px-sm"
+          class="cursor-pointer q-px-md"
           size="sm"
           @click="() => openSocial(icon)"
         ></q-icon>
@@ -162,7 +211,7 @@ import AuthMenu from "src/components/AuthenticationMenu.vue";
 import { APP_ROUTES } from "../common/constants/_routes";
 import { computed, getCurrentInstance, onMounted, ref } from "vue";
 import { useStore } from "vuex";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -180,11 +229,16 @@ export default {
 
     const router = useRouter();
 
-    const route = useRoute();
-
     const leftDrawerOpen = ref(false);
 
     // COMPUTED PROPERTIES
+    const cartItems = computed(() => {
+      return store.getters["cart/getCartItems"];
+    });
+
+    const cartQuantity = computed(() => {
+      return store.getters["cart/getCartQuantity"];
+    });
 
     const getSocials = computed(() => {
       return store.getters["appinfo/getSocials"];
@@ -324,6 +378,8 @@ export default {
       getAppInfo,
       getContactInfo,
       getMailingInfo,
+      cartQuantity,
+      cartItems,
       toggleLeftDrawer,
       openSocial,
       searchProducts,

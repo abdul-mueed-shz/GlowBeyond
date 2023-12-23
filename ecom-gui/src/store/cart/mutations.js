@@ -6,7 +6,7 @@ export function addToCart(state, payload) {
     const product = state.items.find((item) => item.id === payload.id);
     if (product) {
       product.quantity =
-        parseInt(product.quantity) + parseInt(payload.quantity);
+        parseInt(product.quantity ?? 0) + parseInt(payload.quantity);
     } else {
       state.items.push(payload);
     }
@@ -41,13 +41,13 @@ export function deleteFromCart(state, payload) {
       state.items.splice(productIndex, 1);
       return Promise.resolve();
     } else {
-      console.log("Bad Request");
-      return Promise.reject("Bad Request");
+      throw new Error("Bad Request");
     }
   } catch (err) {
     return Promise.reject(err);
   }
 }
+
 export async function clearCart(state) {
   state.items = [];
   state.cartQuantity = 0;

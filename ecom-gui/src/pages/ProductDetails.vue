@@ -26,7 +26,10 @@
         <div class="q-mt-lg text-h5 q-mb-lg">
           {{ `Dhs ${+product.price}` }}
         </div>
-        <div class="column q-gutter-y-md">
+        <q-form
+          @submit.prevent="() => addToCart(product, quantity)"
+          class="column q-gutter-y-md"
+        >
           <div>
             <label for="quantity"> Quantity </label>
             <q-input
@@ -34,19 +37,16 @@
               dense
               label-color="primary"
               v-model="quantity"
+              :rules="[(val) => !!val || 'Quantity is required']"
               outlined
               type="number"
             ></q-input>
           </div>
-          <q-btn
-            @click="addToCart(product, quantity)"
-            label="Add to cart"
-            color="primary"
-          ></q-btn>
+          <q-btn type="submit" label="Add to cart" color="primary"></q-btn>
           <div class="text-body1 text-grey-8">
             {{ product.description }}
           </div>
-        </div>
+        </q-form>
       </div>
     </q-card>
   </q-page>
