@@ -4,5 +4,6 @@ export default function () {
     appInfo: {},
     mailingInfo: [],
     contactInfo: [],
+    bannerItems: [],
   };
 }

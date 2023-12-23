@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from apps.info.models import App, ContactInformation, MailingInformation, Social
+from apps.info.models import (
+    App,
+    BannerItem,
+    ContactInformation,
+    MailingInformation,
+    Social,
+)
 
 
 class SocialSerializer(serializers.ModelSerializer):
@@ -23,4 +29,10 @@ class MailingInformationSerializer(serializers.ModelSerializer):
 class ContactInformationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactInformation
+        fields = "__all__"
+
+
+class BannerItemSerialzer(serializers.ModelSerializer):
+    class Meta:
+        model = BannerItem
         fields = "__all__"

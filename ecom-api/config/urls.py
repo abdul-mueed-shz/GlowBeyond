@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from apps.info.api.views import (
     AppInfoView,
+    BannerItemViewset,
     ContactInfoViewSet,
     MailingInfoViewSet,
     SocialsView,
@@ -21,6 +22,7 @@ router.register(
 router.register(
     api_prefix + "contact-info", ContactInfoViewSet, basename="contact_info"
 )
+router.register(api_prefix + "banner-items", BannerItemViewset, basename="banner_items")
 
 urlpatterns = [
     path("admin/", admin.site.urls),

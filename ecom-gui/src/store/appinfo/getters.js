@@ -13,3 +13,7 @@ export function getMailingInfo(state) {
 export function getContactInfo(state) {
   return state.contactInfo;
 }
+
+export function getBannerItems(state) {
+  return state.bannerItems;
+}

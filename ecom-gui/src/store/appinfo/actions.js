@@ -41,3 +41,13 @@ export async function setContactInfo({ commit }) {
     throw new Error(err);
   }
 }
+
+export async function setBannerItems({ commit }) {
+  try {
+    const res = await api.get("banner-items");
+    commit("setBannerItems", res.data);
+    return res.data;
+  } catch (err) {
+    throw new Error(err);
+  }
+}

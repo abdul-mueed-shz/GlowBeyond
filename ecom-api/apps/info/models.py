@@ -63,3 +63,25 @@ class ContactInformation(BaseModel):
 
     def __str__(self) -> str:
         return self.info
+
+
+def banner_directory_path(instance, filename):
+    return "banner_image/{0}".format(filename)
+
+
+class BannerItem(BaseModel):
+    heading = models.CharField(max_length=255)
+    caption = models.CharField(max_length=255)
+    image = models.ImageField(upload_to=banner_directory_path)
+
+    class Meta:
+        db_table = "banner_item"
+        verbose_name = "Banner Item"
+        verbose_name_plural = "Banner Items"
+
+    def __str__(self) -> str:
+        return self.heading
+
+    def get_image(self):
+        if self.image:
+            return APP_URL + self.image.url

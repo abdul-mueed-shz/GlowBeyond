@@ -9,6 +9,11 @@ export function setAppInfo(state, appInfo) {
 export function setMailingInfo(state, mailingInfo) {
   state.mailingInfo = mailingInfo;
 }
+
 export function setContactInfo(state, contactInfo) {
   state.contactInfo = contactInfo;
+}
+
+export function setBannerItems(state, bannerItems) {
+  state.bannerItems = bannerItems;
 }
