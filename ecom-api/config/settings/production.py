@@ -3,13 +3,14 @@ from .base import *
 DEBUG = False
 
 
-ALLOWED_HOSTS = ["http://127.0.0.1"]
+ALLOWED_HOSTS = ["server.glowbeyond.shop", "www.server.glowbeyond.shop"]
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
 
-
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8081",
+]
 CORS_ALLOW_HEADERS = ["AUTHTOKEN", "content-type"]
+CORS_ALLOW_CREDENTIALS = True
