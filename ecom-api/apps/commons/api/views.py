@@ -1,96 +1,96 @@
-from rest_framework.response import Response
-from rest_framework.exceptions import AuthenticationFailed, ValidationError
-from rest_framework.views import APIView
-import jwt
+# from rest_framework.response import Response
+# from rest_framework.exceptions import AuthenticationFailed, ValidationError
+# from rest_framework.views import APIView
+# import jwt
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
-from apps.user.api.serializers import RegisterSerializer, UserSerializer, TokenSerializer
-
-
-class LogoutView(APIView):
-    @staticmethod
-    def post(request):
-        response = Response()
-        response.delete_cookie('auth_token')
-        response.data = {
-            "message": "Logged out successfully"
-        }
-        return response
+# from apps.user.api.serializers import RegisterSerializer, UserSerializer, TokenSerializer
 
 
-# Create your views here.
-class AuthDetails(APIView):
-    def check_required_fields(self, payload):
-        if payload.get('first_name') and payload.get('last_name') and payload.get('email') and payload.get('exp'):
-            return {
-                'email': payload.get('email'),
-                'first_name': payload.get('first_name'),
-                'last_name': payload.get('last_name'),
-                'expiry': payload.get('exp'),
-                "exp_interval_in_minutes": payload.get('exp_interval_in_minutes')
-            }
-        return False
+# class LogoutView(APIView):
+#     @staticmethod
+#     def post(request):
+#         response = Response()
+#         response.delete_cookie('auth_token')
+#         response.data = {
+#             "message": "Logged out successfully"
+#         }
+#         return response
 
-    def save_auth_token(self, token_data):
-        try:
-            serializer = TokenSerializer(data=token_data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-        except ValidationError:
-            raise ValidationError("Invalid token data")
 
-    def get(self, request):
-        auth_token = request.query_params.get('auth_token', None)
-        if not auth_token:
-            raise AuthenticationFailed("No authentication token found")
+# # Create your views here.
+# class AuthDetails(APIView):
+#     def check_required_fields(self, payload):
+#         if payload.get('first_name') and payload.get('last_name') and payload.get('email') and payload.get('exp'):
+#             return {
+#                 'email': payload.get('email'),
+#                 'first_name': payload.get('first_name'),
+#                 'last_name': payload.get('last_name'),
+#                 'expiry': payload.get('exp'),
+#                 "exp_interval_in_minutes": payload.get('exp_interval_in_minutes')
+#             }
+#         return False
 
-        response = Response()
+#     def save_auth_token(self, token_data):
+#         try:
+#             serializer = TokenSerializer(data=token_data)
+#             serializer.is_valid(raise_exception=True)
+#             serializer.save()
+#         except ValidationError:
+#             raise ValidationError("Invalid token data")
 
-        try:
-            payload = jwt.decode(auth_token, 'secret', algorithms=['HS256'])
+#     def get(self, request):
+#         auth_token = request.query_params.get('auth_token', None)
+#         if not auth_token:
+#             raise AuthenticationFailed("No authentication token found")
 
-            registration_data = self.check_required_fields(payload)
-            if not registration_data:
-                raise AuthenticationFailed("Malformed authentication token")
+#         response = Response()
 
-            token_expiry = registration_data.pop('expiry')
-            token_data = {
-                'token': auth_token,
-                'expiry': token_expiry,
-            }
-            response.set_cookie(key='auth_token', value=auth_token, httponly=True)
-            data = {
-                'auth_token': auth_token,
-                'token_exp_date': token_expiry,
-            }
+#         try:
+#             payload = jwt.decode(auth_token, 'secret', algorithms=['HS256'])
 
-            user = User.objects.filter(email=registration_data.get('email'))
-            if not len(user):
-                serializer = RegisterSerializer(
-                    data=registration_data
-                )
-                serializer.is_valid(raise_exception=True)
-                user = serializer.save()
+#             registration_data = self.check_required_fields(payload)
+#             if not registration_data:
+#                 raise AuthenticationFailed("Malformed authentication token")
 
-                token_data['user'] = user.id
-                self.save_auth_token(token_data)
+#             token_expiry = registration_data.pop('expiry')
+#             token_data = {
+#                 'token': auth_token,
+#                 'expiry': token_expiry,
+#             }
+#             response.set_cookie(key='auth_token', value=auth_token, httponly=True)
+#             data = {
+#                 'auth_token': auth_token,
+#                 'token_exp_date': token_expiry,
+#             }
 
-                data['user_information'] = serializer.data
-                response.data = data
+#             user = User.objects.filter(email=registration_data.get('email'))
+#             if not len(user):
+#                 serializer = RegisterSerializer(
+#                     data=registration_data
+#                 )
+#                 serializer.is_valid(raise_exception=True)
+#                 user = serializer.save()
 
-                return response
+#                 token_data['user'] = user.id
+#                 self.save_auth_token(token_data)
 
-            serializer = UserSerializer(user[0])
+#                 data['user_information'] = serializer.data
+#                 response.data = data
 
-            token_data['user'] = user[0].id
-            self.save_auth_token(token_data)
+#                 return response
 
-            data["user_information"] = serializer.data
-            response.data = data
+#             serializer = UserSerializer(user[0])
 
-            return response
+#             token_data['user'] = user[0].id
+#             self.save_auth_token(token_data)
 
-        except jwt.ExpiredSignatureError:
-            response.delete_cookie(key='auth_token')
-            raise AuthenticationFailed("Unauthenticated")
+#             data["user_information"] = serializer.data
+#             response.data = data
+
+#             return response
+
+#         except jwt.ExpiredSignatureError:
+#             response.delete_cookie(key='auth_token')
+#             raise AuthenticationFailed("Unauthenticated")

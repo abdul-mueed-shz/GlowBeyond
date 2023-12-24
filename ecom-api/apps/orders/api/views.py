@@ -1,4 +1,4 @@
-import stripe
+# import stripe
 from django.contrib.auth.models import User
 from rest_framework.exceptions import AuthenticationFailed, ValidationError, NotFound
 from rest_framework.response import Response

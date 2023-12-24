@@ -44,13 +44,13 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
-    "djoser",
+    # "djoser",
 ]
 
 LOCAL_APPS = [
     "apps.commons.apps.CommonsConfig",
     "apps.product.apps.ProductConfig",
-    "apps.user.apps.UserConfig",
+    # "apps.user.apps.UserConfig",
     "apps.orders.apps.OrdersConfig",
     "apps.payment.apps.PaymentConfig",
     "apps.mailing.apps.MailingConfig",
