@@ -2,7 +2,7 @@
   <img src="https://media.giphy.com/media/L2kr3y97uJauF6T6Lh/giphy.gif" width="100"/>
 </div>
 
-<h1><img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="30px"/>Ecommerce Application</h1>
+<h1><img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="30px"/>GlowBeyond(Ecommerce Application)</h1>
 
 <h4>A Full stack ecommerce application made using quasar 2 for frontend and django rest framework for backend. The application is coupled with [auth-application](https://github.com/Abdul-Mueed-Shahbaz/Auth-Application) for login and jwt token authentication.</h4>
 
